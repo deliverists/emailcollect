@@ -7,7 +7,6 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
-    "claudia": "^5.1.2",
     "claudia-api-builder": "^4.1.1"
   }
 }
