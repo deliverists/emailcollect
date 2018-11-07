@@ -1,0 +1,13 @@
+{
+  "name": "emailcollect",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/deliverists/emailcollect",
+  "author": "Nick Meldrum <nick@nickmeldrum.com>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "claudia": "^5.1.2",
+    "claudia-api-builder": "^4.1.1"
+  }
+}
