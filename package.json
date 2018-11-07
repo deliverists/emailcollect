@@ -7,6 +7,10 @@
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
+    "aws-sdk": "^2.350.0",
     "claudia-api-builder": "^4.1.1"
+  },
+  "devDependencies": {
+    "claudia": "^5.1.2"
   }
 }
