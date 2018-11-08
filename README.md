@@ -4,7 +4,7 @@
 
 ### endpoint:
 
-https://x1kxr64leh.execute-api.us-east-1.amazonaws.com/latest
+https://778qo5mxx9.execute-api.us-east-1.amazonaws.com/latest
 
 ### resources:
 
