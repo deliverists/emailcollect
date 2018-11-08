@@ -1,5 +1,6 @@
 const whiteList = [
   'mysite.com',
+  'mysite2.com',
 ]
 
 module.exports = {

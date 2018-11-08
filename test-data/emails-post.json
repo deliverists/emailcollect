@@ -1,7 +1,7 @@
 {
   "body": {
-    "site": "mysite.com",
-    "email": "testuser@testdomain.com"
+    "site": "mysite2.com",
+    "email": "testuser42@testdomain.com"
   },
   "requestContext": {
     "resourcePath": "/emails",

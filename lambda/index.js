@@ -22,6 +22,11 @@ const validateInput = body => {
 
   if (!body.email) return responses.badRequest('body must include email')
   if (!body.email.includes('@')) return responses.badRequest('email must include an @')
+  
+  // TODO - validate site of email AND sourceIp AND userAgent to stop crazy big objects getting into dynamo
+  // TODO - how to lock endpoint down to stop hackers spamming me?
+    // TODO - what about stopping silly email addresses?
+    // what about stopping duplicates - currently overwrites?
 
   return false
 }
@@ -37,7 +42,7 @@ api.post('/emails', req => {
       email: req.body.email.trim(),
       ip: req.context.sourceIp,
       ua: req.context.userAgent,
-      date: (new Date()).toString(),
+      date: (new Date()).toISOString(),
     },
   }
   return dynamoDb.put(params).promise()
