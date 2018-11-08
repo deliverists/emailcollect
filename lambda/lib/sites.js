@@ -1,6 +1,5 @@
 const whiteList = [
-  'mysite.com',
-  'mysite2.com',
+  'www.clockswan.com',
 ]
 
 module.exports = {

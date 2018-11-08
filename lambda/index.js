@@ -23,6 +23,7 @@ const validateInput = body => {
   // TODO - how to lock endpoint down to stop hackers spamming me?
   // TODO - what about stopping silly email addresses?
   // what about stopping duplicates - currently overwrites?
+    // check the referrer is from valid domain as well
 
   return false
 }
