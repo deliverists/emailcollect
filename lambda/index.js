@@ -16,8 +16,13 @@ return dynamoDb.scan({ TableName: 'emails' })
 */
 
 const validateInput = body => {
+  console.log('info', body.site)
+  if (!body.site) return responses.badRequest('body must include site')
   if (!siteAllowed(body.site)) return responses.badRequest('site not registered, sign up at https://www.emailcollect.com!')
+
+  if (!body.email) return responses.badRequest('body must include email')
   if (!body.email.includes('@')) return responses.badRequest('email must include an @')
+
   return false
 }
 
@@ -32,7 +37,7 @@ api.post('/emails', req => {
       email: req.body.email.trim(),
       ip: req.context.sourceIp,
       ua: req.context.userAgent,
-      date: new Date(),
+      date: (new Date()).toString(),
     },
   }
   return dynamoDb.put(params).promise()

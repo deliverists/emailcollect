@@ -8,11 +8,28 @@
         "TableName": "emails",
         "AttributeDefinitions": [
           { "AttributeName": "email", "AttributeType": "S" },
-          { "AttributeName": "site", "AttributeType": "S" }
+          { "AttributeName": "site", "AttributeType": "S" },
+          { "AttributeName": "date", "AttributeType": "S" }
         ],
         "KeySchema": [
           { "AttributeName": "email", "KeyType": "HASH" },
           { "AttributeName": "site", "KeyType": "RANGE" }
+        ],
+        "GlobalSecondaryIndexes" : [
+          {
+            "IndexName": "by-site",
+            "KeySchema" : [
+              { "AttributeName": "site", "KeyType": "HASH" },
+              { "AttributeName": "date", "KeyType": "RANGE" }
+            ],
+            "Projection" : {
+              "ProjectionType" : "KEYS_ONLY"
+            },
+            "ProvisionedThroughput": {
+              "ReadCapacityUnits": 2,
+              "WriteCapacityUnits": 2
+            }
+          }
         ],
         "ProvisionedThroughput": {
           "ReadCapacityUnits": 2,

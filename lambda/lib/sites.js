@@ -3,5 +3,5 @@ const whiteList = [
 ]
 
 module.exports = {
-  siteAllowed: site => whiteList.contains(site)
+  siteAllowed: site => whiteList.includes(site)
 }

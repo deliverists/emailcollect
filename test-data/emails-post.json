@@ -1,0 +1,14 @@
+{
+  "body": {
+    "site": "mysite.com",
+    "email": "testuser@testdomain.com"
+  },
+  "requestContext": {
+    "resourcePath": "/emails",
+    "httpMethod": "POST",
+    "identity": {
+      "sourceIp": "127.0.0.42",
+      "userAgent": "my test function"
+    }
+  }
+}
