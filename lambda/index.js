@@ -8,7 +8,7 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient()
 
 api.get('/health', () => ({ status: 'a-okay', }))
 
-api.get('/emails', req => responses.serverError('not implemented')
+api.get('/emails', req => responses.serverError('not implemented'))
 /*
 return dynamoDb.scan({ TableName: 'emails' })
   .promise()

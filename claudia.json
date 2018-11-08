@@ -1,0 +1,11 @@
+{
+  "lambda": {
+    "role": "emailcollect-executor",
+    "name": "emailcollect",
+    "region": "us-east-1"
+  },
+  "api": {
+    "id": "x1kxr64leh",
+    "module": "lambda/index"
+  }
+}
