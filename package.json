@@ -7,9 +7,8 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "claudia-create": "node_modules/.bin/claudia create --region us-east-1 --api-module server --policies policy",
-    "claudia-update": "node_modules/.bin/claudia update",
-    "cf-update": "node --experimental-modules cf/index.mjs"
+    "create-lambda": "node_modules/.bin/claudia create --region us-east-1 --api-module lambda/index --policies lambda/policy",
+    "cf": "node --experimental-modules cf/index"
   },
   "dependencies": {
     "aws-sdk": "^2.350.0",
