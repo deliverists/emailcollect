@@ -1,3 +1,0 @@
-#!/bin/sh
-set -e
-node_modules/.bin/claudia create --region us-east-1 --api-module server --policies policy
