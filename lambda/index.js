@@ -40,13 +40,19 @@ const updateDynamoDb = ({ body: {site, email}, context: {sourceIp, userAgent} })
     },
   }).promise()
 
+const originAllowed = ({ headers: { origin } }) => {
+  if (!origin) return false
+  const domain = origin.replace('https://', '')
+  return siteAllowed(domain)
+}
+
 api.corsOrigin(req => {
   if (!req.headers.origin) return ''
-  const origin = req.headers.origin.replace('https://', '')
-  return siteAllowed(origin) ? req.headers.origin : ''
+  return originAllowed(req) ? req.headers.origin : ''
 })
 
 api.post('/emails', req => {
+  if (!originAllowed(req)) return response.badRequest('origin not allowed')
   const validationError = validateInput(req.body)
   if (validationError) return validationError
 
