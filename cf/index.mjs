@@ -1,4 +1,4 @@
-import createOrUpdateStack from './create-update'
+import createOrUpdateStack from './lib/cf-create-update'
 
 const executeasync = async () => {
   await createOrUpdateStack()

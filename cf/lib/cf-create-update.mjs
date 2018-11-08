@@ -7,15 +7,16 @@ import {
   readTextFile,
   writeObjectToJsonFile,
   deleteFile,
-} from './lib/read-local-file'
+} from './read-local-file'
 import {
   filenameRelativeToInfrastructure,
   filenameRelativeToProjectRoot,
-} from './lib/dir-name'
+} from './dir-name'
 
 const exec = util.promisify(process.exec)
 
 ////// project specific values /////////////
+const region = 'us-east-1'
 const infrastructureBucketName = 'emailcollect-infrastructure'
 const templateName = 'cf-template.json'
 const stackName = 'emailcollect'
@@ -23,8 +24,10 @@ const getParameters = () => []
 ////// project specific values /////////////
 
 const infrastructureBucketUrl = `https://${infrastructureBucketName}.s3.amazonaws.com/`
-const templateUrl = `${infrastructureBucketUrl}/${templateName}`
+const localTemplateFile = `./cf/${templateName}`
+const templateUrl = `${infrastructureBucketUrl}${templateName}`
 
+Aws.config.update({ region })
 const s3 = new Aws.S3({ params: { Bucket: infrastructureBucketName } })
 const cloudformation = new Aws.CloudFormation()
 
@@ -56,15 +59,15 @@ const syncTemplates = async () => {
     await s3
       .upload({
         Key: templateName,
-        Body: getStream(stackFile),
+        Body: getStream(localTemplateFile),
       })
       .promise(),
   )
-  deleteFile(stackFile)
 }
 
 const validateTemplate = async () => {
   console.log('validating template...')
+  console.log(`template url: ${templateUrl}`)
   await cloudformation
     .validateTemplate({
       TemplateURL: templateUrl,
