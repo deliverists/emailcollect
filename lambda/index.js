@@ -1,7 +1,14 @@
 const ApiBuilder = require('claudia-api-builder')
 const AWS = require('aws-sdk')
 const response = require('./lib/responses')
-const siteAllowed = require('./lib/sites').siteAllowed
+const emails = require('./lib/emails')
+const sites = require('./lib/sites')
+const ip = require('./lib/ip')
+
+const normalizeEmail = emails.normalize
+const validateEmail = emails.validate
+const validateSite = sites.validate
+const validateIp = ip.validate
 
 const api = new ApiBuilder()
 const dynamoDb = new AWS.DynamoDB.DocumentClient()
@@ -10,22 +17,17 @@ api.get('/health', () => response.success('a-okay'))
 
 api.get('/emails', req => response.serverError('not implemented'))
 
-const validateInput = (body) => {
-  if (!body.site) return response.badRequest('body must include site')
-  if (!siteAllowed(body.site)) return response.badRequest('site not registered, sign up at https://www.emailcollect.com!')
+const validateInput = ({ body: {site, email}, context: {sourceIp, userAgent}, normalizedHeaders: {referer} }) => {
+  const emailValidation = validateEmail(email)
+  if (!emailValidation.valid) return response.badRequest(emailValidation.message)
 
-  const re = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,6}$/;
-  if (!body.email) return response.badRequest('body must include email')
-  if (!body.email.includes('@')) return response.badRequest('email must include an @')
-  if (!re.test(body.email.trim())) return response.badRequest('email is not valid')
-  
-  // TODO - validate site of email AND sourceIp AND userAgent to stop crazy big objects getting into dynamo
-  // TODO - how to lock endpoint down to stop hackers spamming me?
-  // TODO - what about stopping silly email addresses?
-  // what about stopping duplicates - currently overwrites?
-  // check the referrer is from valid domain as well
+  const siteValidation = validateSite(site, referer)
+  if (!siteValidation.valid) return response.badRequest(siteValidation.message)
 
-  return false
+  const ipValidation = validateIp(sourceIp)
+  if (!ipValidation.valid) return response.badRequest(ipValidation.message)
+
+  return null
 }
 
 const updateDynamoDb = ({ body: {site, email}, context: {sourceIp, userAgent} }) =>
@@ -33,27 +35,27 @@ const updateDynamoDb = ({ body: {site, email}, context: {sourceIp, userAgent} })
     TableName: 'emails',
     Item: {
       site: site,
-      email: email.trim(),
+      email: normalizeEmail(email),
       ip: sourceIp,
-      ua: userAgent,
+      ua: userAgent.substring(500),
       date: (new Date()).toISOString(),
     },
   }).promise()
 
-const originAllowed = ({ headers: { origin } }) => {
+const originAllowed = ({ normalizedHeaders: { origin } }) => {
   if (!origin) return false
   const domain = origin.replace('https://', '')
   return siteAllowed(domain)
 }
 
 api.corsOrigin(req => {
-  if (!req.headers.origin) return ''
-  return originAllowed(req) ? req.headers.origin : ''
+  if (!req.normalizedHeaders.origin) return ''
+  return originAllowed(req) ? req.normalizedHeaders.origin : ''
 })
 
 api.post('/emails', req => {
   if (!originAllowed(req)) return response.badRequest('origin not allowed')
-  const validationError = validateInput(req.body)
+  const validationError = validateInput(req)
   if (validationError) return validationError
 
   return updateDynamoDb(req).then(result => response.success('subscribed'))
