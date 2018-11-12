@@ -7,6 +7,7 @@ const ip = require('./lib/ip')
 
 const normalizeEmail = emails.normalize
 const validateEmail = emails.validate
+const domainAllowed = sites.domainAllowed
 const validateSite = sites.validate
 const validateIp = ip.validate
 
@@ -37,15 +38,13 @@ const updateDynamoDb = ({ body: {site, email}, context: {sourceIp, userAgent} })
       site: site,
       email: normalizeEmail(email),
       ip: sourceIp,
-      ua: userAgent.substring(500),
+      ua: userAgent.substring(0, 500),
       date: (new Date()).toISOString(),
     },
   }).promise()
 
 const originAllowed = ({ normalizedHeaders: { origin } }) => {
-  if (!origin) return false
-  const domain = origin.replace('https://', '')
-  return siteAllowed(domain)
+  return (!origin) ? false : domainAllowed(origin)
 }
 
 api.corsOrigin(req => {

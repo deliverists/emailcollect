@@ -1,6 +1,6 @@
 {
   "body": {
-    "site": "mysite2.com",
+    "site": "www.clockswan.com",
     "email": "testuser42@testdomain.com"
   },
   "requestContext": {
@@ -10,5 +10,8 @@
       "sourceIp": "127.0.0.42",
       "userAgent": "my test function"
     }
+  },
+  "headers": {
+    "Origin": "https://www.clockswan.com"
   }
 }

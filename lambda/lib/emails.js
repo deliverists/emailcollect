@@ -8,13 +8,12 @@ const re = /^([\w-\.]+)@([\w-]+\.+[\w-]{2,6})$/
 const matcher = index => email => email.match(re)[index]
 const namePart = matcher(1)
 const domainPart = matcher(2)
+const normalize = email => email.trim().toLowerCase()
 
 module.exports = {
-  normalize(email) {
-    return email.trim().toLowerCase()
-  },
+  normalize,
   validate(_email) {
-    const email = this.normalize(_email)
+    const email = normalize(_email)
 
     const emailPresent = !!email
     const emailValidSize = email.length <= maxLength
