@@ -52,6 +52,8 @@ api.corsOrigin(req => {
   return originAllowed(req) ? req.normalizedHeaders.origin : ''
 })
 
+api.corsMaxAge(3600) // 1 hour in seconds
+
 api.post('/emails', req => {
   if (!originAllowed(req)) return response.badRequest('origin not allowed')
   const validationError = validateInput(req)
