@@ -7,17 +7,10 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "create-lambda": "node_modules/.bin/claudia create --region us-east-1 --api-module lambda/index --policies lambda/policy",
-    "cf": "node --experimental-modules cf/index",
-    "test-health-get": "yarn claudia test-lambda --event ./test-data/health-get.json",
-    "test-emails-post": "yarn claudia test-lambda --event ./test-data/emails-post.json",
-    "test-emails-get": "yarn claudia test-lambda --event ./test-data/emails-get.json"
   },
   "dependencies": {
-    "aws-sdk": "^2.350.0",
-    "claudia-api-builder": "^4.1.1"
+    "aws-sdk": "^2.350.0"
   },
   "devDependencies": {
-    "claudia": "^5.1.2"
   }
 }

@@ -21,3 +21,4 @@ https://778qo5mxx9.execute-api.us-east-1.amazonaws.com/latest
 
  * move over to serverless
  * add dynamodb + lambda + api gateway (with limiting) into serverless setup
+ * then add cognito authentication in
