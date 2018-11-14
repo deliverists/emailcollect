@@ -1,22 +1,30 @@
-const ApiBuilder = require('claudia-api-builder')
+'use strict'
+
+const serverless = require('serverless-http');
+const bodyParser = require('body-parser')
+const express = require('express')
 const AWS = require('aws-sdk')
-const response = require('./lib/responses')
-const emails = require('./lib/emails')
-const sites = require('./lib/sites')
-const ip = require('./lib/ip')
 
-const normalizeEmail = emails.normalize
-const validateEmail = emails.validate
-const domainAllowed = sites.domainAllowed
-const validateSite = sites.validate
-const validateIp = ip.validate
+const USERS_TABLE = process.env.USERS_TABLE
+const IS_OFFLINE = process.env.IS_OFFLINE
 
-const api = new ApiBuilder()
-const dynamoDb = new AWS.DynamoDB.DocumentClient()
+const dynamoDb = new AWS.DynamoDB.DocumentClient(
+  IS_OFFLINE ? {
+    region: 'localhost',
+    endpoint: 'http://localhost:8000'
+  } : undefined
+)
+const app = express()
 
-api.get('/health', () => response.success('a-okay'))
+app.use(bodyParser.json({ strict: false }))
 
-api.get('/emails', req => response.serverError('not implemented'))
+app.get('/health', (req, res) => res.send('a-okay'))
+
+app.get('/emails', (req, res) => res.send('not implemented'))
+
+module.exports.handler = serverless(app)
+
+/*
 
 const validateInput = ({ body: {site, email}, context: {sourceIp, userAgent}, normalizedHeaders: {referer} }) => {
   const emailValidation = validateEmail(email)
@@ -64,3 +72,4 @@ api.post('/emails', req => {
 
 
 module.exports = api
+*/

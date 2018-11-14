@@ -1,6 +1,0 @@
-#!/bin/sh
-set -e
-export AWS_DEFAULT_REGION=us-east-1
-
-aws s3api create-bucket --bucket emailcollect-infrastructure --region us-east-1 --acl private
-aws s3api put-bucket-versioning --bucket emailcollect-infrastructure --versioning-configuration Status=Enabled

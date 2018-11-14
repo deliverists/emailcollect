@@ -1,0 +1,105 @@
+service: emailcollect
+
+custom:
+  tableName: 'emails-table-$(self:provider.stage)'
+  dynamodb:
+    start:
+      migrate: true
+
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
+  - serverless-jest-plugin
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: us-east-1
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - dynamodb:PutItem
+      Resource:
+        - { "Fn::GetAtt": ["EmailTable", "Arn"] }
+  environment:
+    USERS_TABLE: $(self:custom.tableName)
+
+functions:
+  health:
+    handler: lambda/index.handler
+    events:
+      - http: 'GET /health'
+  getUser:
+    handler: lambda/index.handler
+    events:
+      - http: 'GET /emails/{proxy+}'
+  postUser:
+    handler: lambda/index.handler
+    events:
+      - http: 'POST /emails'
+#          path: users/create
+#          method: get
+#      - s3: ${env:BUCKET}
+#      - schedule: rate(10 minutes)
+#      - sns: greeter-topic
+#      - stream: arn:aws:dynamodb:region:XXXXXX:table/foo/stream/1970-01-01T00:00:00.000
+#      - alexaSkill: amzn1.ask.skill.xx-xx-xx-xx
+#      - alexaSmartHome: amzn1.ask.skill.xx-xx-xx-xx
+#      - iot:
+#          sql: "SELECT * FROM 'some_topic'"
+#      - cloudwatchEvent:
+#          event:
+#            source:
+#              - "aws.ec2"
+#            detail-type:
+#              - "EC2 Instance State-change Notification"
+#            detail:
+#              state:
+#                - pending
+#      - cloudwatchLog: '/aws/lambda/hello'
+#      - cognitoUserPool:
+#          pool: MyUserPool
+#          trigger: PreSignUp
+
+#    Define function environment variables here
+#    environment:
+#      variable2: value2
+
+resources:
+  Resources:
+    EmailTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: emails
+        AttributeDefinitions:
+        - AttributeName: email
+          AttributeType: S
+        - AttributeName: site
+          AttributeType: S
+        - AttributeName: date
+          AttributeType: S
+        KeySchema:
+        - AttributeName: email
+          KeyType: HASH
+        - AttributeName: site
+          KeyType: RANGE
+        GlobalSecondaryIndexes:
+        - IndexName: by-site
+          KeySchema:
+          - AttributeName: site
+            KeyType: HASH
+          - AttributeName: date
+            KeyType: RANGE
+          Projection:
+            ProjectionType: KEYS_ONLY
+          ProvisionedThroughput:
+            ReadCapacityUnits: 2
+            WriteCapacityUnits: 2
+        ProvisionedThroughput:
+          ReadCapacityUnits: 2
+          WriteCapacityUnits: 2
+#  Outputs:
+#     NewOutput:
+#       Description: "Description for the output"
+#       Value: "Some output value"
