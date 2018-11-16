@@ -7,19 +7,20 @@ const { IS_OFFLINE, USERS_TABLE } = process.env
 
 const normalize = input => input.trim().toLowerCase()
 
-const dynamoDb = new AWS.DynamoDB.DocumentClient(
-  IS_OFFLINE
-    ? {
-        region: 'localhost',
-        endpoint: 'http://localhost:8000',
-      }
-    : undefined,
-)
+const initDyanmo = () =>
+  new AWS.DynamoDB.DocumentClient(
+    IS_OFFLINE
+      ? {
+          region: 'localhost',
+          endpoint: 'http://localhost:8000',
+        }
+      : { region: 'us-east-1' },
+  )
 
 const app = express()
 
 const updateDynamoDb = ({ body: { site, email }, ip, headers }) =>
-  dynamoDb
+  initDyanmo()
     .put({
       TableName: USERS_TABLE,
       Item: {
@@ -39,7 +40,9 @@ app.get('/health', (req, res) => res.send('a-okay'))
 app.get('/emails', (req, res) => res.status(500).send('not implemented'))
 
 app.post('/emails', (req, res) => {
-  updateDynamoDb(req).then(() => res.send('subscribed'))
+  updateDynamoDb(req)
+    .then(() => res.send('subscribed'))
+    .catch(err => res.status(500).send(err))
 })
 
 module.exports.handler = serverless(app)

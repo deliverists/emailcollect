@@ -8,8 +8,8 @@
   "private": true,
   "scripts": {
     "run:local": "sls offline start",
-    "test": "jest --notify --coverage",
-    "watch": "jest --notify --watch --coverage",
+    "test": "IS_OFFLINE=false USERS_TABLE=test-emails jest --notify --coverage",
+    "watch": "yarn test --watch",
     "deploy:all": "sls deploy -v",
     "deploy:lambda": "sls deploy function -f hello -v",
     "invoke": "sls invoke -f hello -l"
@@ -22,6 +22,7 @@
     "serverless-http": "^1.8.0"
   },
   "devDependencies": {
+    "aws-sdk-mock": "^4.2.0",
     "eslint": "^5.9.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-config-prettier": "^3.3.0",
