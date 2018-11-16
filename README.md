@@ -16,6 +16,7 @@ https://778qo5mxx9.execute-api.us-east-1.amazonaws.com/latest
 
  * to create an authenticated end point: https://medium.freecodecamp.org/how-to-secure-microservices-on-aws-with-cognito-api-gateway-and-lambda-4bfaa7a6583c
  * https://serverless-stack.com
+ * good examples of event sources: https://docs.aws.amazon.com/lambda/latest/dg/eventsources.html
 
 ### todo:
 

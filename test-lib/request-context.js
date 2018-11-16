@@ -1,4 +1,4 @@
-module.exports = (method, path) => {
+module.exports = (method, path, body) => {
   const httpMethod = method.trim().toUpperCase()
   return {
     headers: {
@@ -13,6 +13,7 @@ module.exports = (method, path) => {
       'Accept-Encoding': 'gzip, deflate, br',
       'Accept-Language': 'en-GB,en-US;q=0.9,en;q=0.8',
       'If-None-Match': 'W/"6-T1n80esREtcp0eCEVRtc0lY3Pts"',
+      'Content-Type': 'application/json',
     },
     multiValueHeaders: {
       Host: ['localhost:3000'],
@@ -62,7 +63,7 @@ module.exports = (method, path) => {
     queryStringParameters: null,
     multiValueQueryStringParameters: null,
     stageVariables: null,
-    body: null,
+    body,
     isOffline: true,
   }
 }

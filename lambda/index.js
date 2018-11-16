@@ -5,6 +5,8 @@ const AWS = require('aws-sdk')
 
 const { IS_OFFLINE, USERS_TABLE } = process.env
 
+const normalize = input => input.trim().toLowerCase()
+
 const dynamoDb = new AWS.DynamoDB.DocumentClient(
   IS_OFFLINE
     ? {
@@ -16,18 +18,15 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient(
 
 const app = express()
 
-const updateDynamoDb = ({
-  body: { site, email },
-  context: { sourceIp, userAgent },
-}) =>
+const updateDynamoDb = ({ body: { site, email }, ip, headers }) =>
   dynamoDb
     .put({
       TableName: USERS_TABLE,
       Item: {
         site,
-        email: normalizeEmail(email),
-        ip: sourceIp,
-        ua: userAgent.substring(0, 500),
+        email: normalize(email),
+        ip,
+        ua: headers['user-agent'].substring(0, 500),
         date: new Date().toISOString(),
       },
     })
