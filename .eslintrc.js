@@ -8,5 +8,11 @@ module.exports = {
   },
   rules: {
     'no-console': 0,
+    'import/no-extraneous-dependencies': [
+      'error',
+      {
+        devDependencies: ['test-lib/*.js', '__tests__/*.js'],
+      },
+    ],
   },
 }

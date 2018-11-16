@@ -1,6 +1,0 @@
-{
-  "requestContext": {
-    "resourcePath": "/emails",
-    "httpMethod": "GET"
-  }
-}

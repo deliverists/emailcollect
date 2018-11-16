@@ -1,15 +1,18 @@
 service: emailcollect
 
-custom:
-  tableName: 'emails-table-$(self:provider.stage)'
-  dynamodb:
-    start:
-      migrate: true
-
 plugins:
   - serverless-dynamodb-local
   - serverless-offline
   - serverless-jest-plugin
+
+custom:
+  jest:
+    notify: true
+    collectCoverage: true
+  tableName: 'emails-table-$(self:provider.stage)'
+  dynamodb:
+    start:
+      migrate: true
 
 provider:
   name: aws

@@ -8,8 +8,8 @@
   "private": true,
   "scripts": {
     "run:local": "sls offline start",
-    "test": "jest --notify",
-    "watch": "jest --notify --watch",
+    "test": "jest --notify --coverage",
+    "watch": "jest --notify --watch --coverage",
     "deploy:all": "sls deploy -v",
     "deploy:lambda": "sls deploy function -f hello -v",
     "invoke": "sls invoke -f hello -l"

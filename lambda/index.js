@@ -1,11 +1,9 @@
 const serverless = require('serverless-http')
 const bodyParser = require('body-parser')
 const express = require('express')
-
-/*
 const AWS = require('aws-sdk')
-const USERS_TABLE = process.env.USERS_TABLE
-const { IS_OFFLINE } = process.env
+
+const { IS_OFFLINE, USERS_TABLE } = process.env
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient(
   IS_OFFLINE
@@ -15,14 +13,35 @@ const dynamoDb = new AWS.DynamoDB.DocumentClient(
       }
     : undefined,
 )
-*/
+
 const app = express()
+
+const updateDynamoDb = ({
+  body: { site, email },
+  context: { sourceIp, userAgent },
+}) =>
+  dynamoDb
+    .put({
+      TableName: USERS_TABLE,
+      Item: {
+        site,
+        email: normalizeEmail(email),
+        ip: sourceIp,
+        ua: userAgent.substring(0, 500),
+        date: new Date().toISOString(),
+      },
+    })
+    .promise()
 
 app.use(bodyParser.json({ strict: false }))
 
 app.get('/health', (req, res) => res.send('a-okay'))
 
-app.get('/emails', (req, res) => res.send('not implemented'))
+app.get('/emails', (req, res) => res.status(500).send('not implemented'))
+
+app.post('/emails', (req, res) => {
+  updateDynamoDb(req).then(() => res.send('subscribed'))
+})
 
 module.exports.handler = serverless(app)
 
@@ -41,17 +60,6 @@ const validateInput = ({ body: {site, email}, context: {sourceIp, userAgent}, no
   return null
 }
 
-const updateDynamoDb = ({ body: {site, email}, context: {sourceIp, userAgent} }) =>
-  dynamoDb.put({
-    TableName: 'emails',
-    Item: {
-      site: site,
-      email: normalizeEmail(email),
-      ip: sourceIp,
-      ua: userAgent.substring(0, 500),
-      date: (new Date()).toISOString(),
-    },
-  }).promise()
 
 const originAllowed = ({ normalizedHeaders: { origin } }) => {
   return (!origin) ? false : domainAllowed(origin)
