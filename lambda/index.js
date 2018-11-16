@@ -1,19 +1,21 @@
-'use strict'
-
-const serverless = require('serverless-http');
+const serverless = require('serverless-http')
 const bodyParser = require('body-parser')
 const express = require('express')
-const AWS = require('aws-sdk')
 
+/*
+const AWS = require('aws-sdk')
 const USERS_TABLE = process.env.USERS_TABLE
-const IS_OFFLINE = process.env.IS_OFFLINE
+const { IS_OFFLINE } = process.env
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient(
-  IS_OFFLINE ? {
-    region: 'localhost',
-    endpoint: 'http://localhost:8000'
-  } : undefined
+  IS_OFFLINE
+    ? {
+        region: 'localhost',
+        endpoint: 'http://localhost:8000',
+      }
+    : undefined,
 )
+*/
 const app = express()
 
 app.use(bodyParser.json({ strict: false }))
