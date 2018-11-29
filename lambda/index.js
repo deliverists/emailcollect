@@ -1,37 +1,10 @@
 const serverless = require('serverless-http')
 const bodyParser = require('body-parser')
 const express = require('express')
-const AWS = require('aws-sdk')
 
-const { IS_OFFLINE, USERS_TABLE } = process.env
-
-const normalize = input => input.trim().toLowerCase()
-
-const initDyanmo = () =>
-  new AWS.DynamoDB.DocumentClient(
-    IS_OFFLINE
-      ? {
-          region: 'localhost',
-          endpoint: 'http://localhost:8000',
-        }
-      : { region: 'us-east-1' },
-  )
+const emails = require('./lib/emails')
 
 const app = express()
-
-const updateDynamoDb = ({ body: { site, email }, ip, headers }) =>
-  initDyanmo()
-    .put({
-      TableName: USERS_TABLE,
-      Item: {
-        site,
-        email: normalize(email),
-        ip,
-        ua: headers['user-agent'].substring(0, 500),
-        date: new Date().toISOString(),
-      },
-    })
-    .promise()
 
 app.use(bodyParser.json({ strict: false }))
 
@@ -39,11 +12,7 @@ app.get('/health', (req, res) => res.send('a-okay'))
 
 app.get('/emails', (req, res) => res.status(500).send('not implemented'))
 
-app.post('/emails', (req, res) => {
-  updateDynamoDb(req)
-    .then(() => res.send('subscribed'))
-    .catch(err => res.status(500).send(err))
-})
+app.post('/emails', (req, res) => emails.upsert(req, res))
 
 module.exports.handler = serverless(app)
 

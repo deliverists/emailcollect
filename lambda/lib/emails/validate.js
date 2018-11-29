@@ -1,7 +1,4 @@
-const domainBlackList = [
-  'example.com',
-  'example.org',
-]
+const domainBlackList = ['example.com', 'example.org']
 const maxLength = 254
 const re = /^([\w-\.]+)@([\w-]+\.+[\w-]{2,6})$/
 
@@ -10,7 +7,7 @@ const namePart = matcher(1)
 const domainPart = matcher(2)
 const normalize = email => email.trim().toLowerCase()
 
-module.exports = {
+const validations = {
   normalize,
   validate(_email) {
     const email = normalize(_email)
@@ -22,10 +19,14 @@ module.exports = {
 
     const message = null
     if (!emailPresent) message = 'your email address must be included'
-    if (!emailValidSize) message = `email must be shorter than ${maxLength + 1} characters`
+    if (!emailValidSize)
+      message = `email must be shorter than ${maxLength + 1} characters`
     if (!emailValid) message = 'email must be in the form: "recipient@domain.com"'
-    if (!emailAllowed) message = 'email must be on an allowed domain (e.g. not "example.com")'
+    if (!emailAllowed)
+      message = 'email must be on an allowed domain (e.g. not "example.com")'
 
-    return (message) ? { valid: false, message } : { valid: true }
-  }
+    return message ? { valid: false, message } : { valid: true }
+  },
 }
+
+module.exports = req => req
