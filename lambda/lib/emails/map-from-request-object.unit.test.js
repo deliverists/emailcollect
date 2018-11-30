@@ -1,5 +1,5 @@
 const lolex = require('lolex')
-const mapFromRequestObject = require('../../lambda/lib/emails/map-from-request-object')
+const mapFromRequestObject = require('./map-from-request-object')
 
 describe('emails object mapping', () => {
   let clock

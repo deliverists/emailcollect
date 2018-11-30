@@ -1,4 +1,4 @@
-const connection = require('../../lambda/lib/data-connection')
+const connection = require('./data-connection')
 
 jest.mock('aws-sdk', () => ({
   DynamoDB: {

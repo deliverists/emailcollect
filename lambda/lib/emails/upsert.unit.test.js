@@ -1,8 +1,8 @@
-const connection = require('../../lambda/lib/data-connection')
-const upsert = require('../../lambda/lib/emails/upsert')
+const connection = require('../data-connection')
+const upsert = require('./upsert')
 
-jest.mock('../../lambda/lib/data-connection')
-jest.mock('../../lambda/lib/variables', () => ({
+jest.mock('../data-connection')
+jest.mock('../variables', () => ({
   EMAILS_TABLE: 'table-namey-thing',
 }))
 

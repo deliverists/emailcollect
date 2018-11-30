@@ -1,4 +1,4 @@
-const validate = require('../../lambda/lib/emails/validate')
+const validate = require('./validate')
 
 describe('emails validation', () => {
   test('validation passes the request object through', () => {
