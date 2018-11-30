@@ -15,14 +15,11 @@ jest.mock('../../lambda/lib/variables', () => ({
 }))
 
 describe('data connection', () => {
-  test('something', done => {
-    connection
-      .upsert('table-name', {
-        foo: 'bart',
-      })
-      .then(output => {
-        expect(output).toEqual({ Item: { foo: 'bart' }, TableName: 'table-name' })
-        done()
-      })
+  test('something', async () => {
+    const output = await connection.upsert('table-name', {
+      foo: 'bart',
+    })
+
+    expect(output).toEqual({ Item: { foo: 'bart' }, TableName: 'table-name' })
   })
 })
