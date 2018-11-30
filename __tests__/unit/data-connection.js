@@ -10,9 +10,12 @@ jest.mock('aws-sdk', () => ({
   },
 }))
 
+jest.mock('../../lambda/lib/variables', () => ({
+  IS_OFFLINE: true,
+}))
+
 describe('data connection', () => {
   test('something', done => {
-    process.env.IS_OFFLINE = true
     connection
       .upsert('table-name', {
         foo: 'bart',
