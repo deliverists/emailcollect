@@ -32,13 +32,19 @@ functions:
     environment:
       EMAILS_TABLE: ${self:custom.tableName}
     events:
-      - http: 'GET /health'
+      - http:
+          path: /health
+          method: get
+          cors: true
   postEmail:
     handler: lambda/index.handler
     environment:
       EMAILS_TABLE: ${self:custom.tableName}
     events:
-      - http: 'POST /emails'
+      - http:
+          path: /emails
+          method: post
+          cors: true
 
 resources:
   Resources:
