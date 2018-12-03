@@ -48,20 +48,14 @@ then probably you just need to run: `sls dynamodb install`
 
 ### todo:
 
- * convert this mess to use express middleware properly!!!
-    * DONE:
-      * validate body
-      * map body
-      * get the validation working properly
-      * upsert
-    * TODO:
-      * check origin allowed in sites list as well as site in body
-      * referer should be in whitelist too?
-      * cors?
+ * make 200 response a json object to simplify client code auto parsing json
+ * clean up cors code - do we need the options line?
+ * put dynamic cors option in checking site whitelist
+ * add referer/ origin option in checking site whitelist
+ * add throttling options??? - how reduce potential cost
+ * stop dynamo adds for existing email/site combo??? - any dynamo options here?
+ * add prod stage
+ * add authentication for /get emails route - cognito?
  * error response currently returns HTML not json error?, repo using: `curl -d {\"key\":\"value\"} -H "Content-Type: application/json" -X POST "http://localhost:3000/emails"`
  * `curl -d {\"email\":\"who.com\"} -H "Content-Type: application/json" -X POST "http://localhost:3000/emails"` creates error about missing key table_name - are the process env variables not set up right in local running?
  * need 2 jest test runs based on matching `.integration.test.js` and `.unit.test.js`
-
- * move over to serverless
- * add dynamodb + lambda + api gateway (with limiting) into serverless setup
- * then add cognito authentication in
