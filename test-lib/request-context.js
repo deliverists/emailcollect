@@ -1,4 +1,4 @@
-module.exports = (method, path, body) => {
+module.exports = (method, path, body, sourceIp = '127.0.0.1') => {
   const httpMethod = method.trim().toUpperCase()
   return {
     headers: {
@@ -44,7 +44,7 @@ module.exports = (method, path, body) => {
         cognitoIdentityId: 'offlineContext_cognitoIdentityId',
         caller: 'offlineContext_caller',
         apiKey: 'offlineContext_apiKey',
-        sourceIp: '127.0.0.1',
+        sourceIp,
         cognitoAuthenticationType: 'offlineContext_cognitoAuthenticationType',
         cognitoAuthenticationProvider:
           'offlineContext_cognitoAuthenticationProvider',

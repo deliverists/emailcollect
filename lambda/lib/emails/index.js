@@ -1,15 +1,7 @@
-const validateRequest = require('./validate')
-const mapFromRequestObject = require('./map-from-request-object')
+const validate = require('./validate')
 const upsert = require('./upsert')
-const respond = require('./respond')
-const { pipe } = require('../functional')
 
-module.exports = {
-  upsert: (req, res) =>
-    pipe(
-      validateRequest,
-      mapFromRequestObject,
-      upsert,
-      respond(res),
-    )(req),
+module.exports = app => {
+  validate(app)
+  app.post('/emails', upsert)
 }
