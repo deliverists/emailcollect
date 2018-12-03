@@ -9,7 +9,7 @@ custom:
   jest:
     notify: true
     collectCoverage: true
-  tableName: 'emails-table-$(self:provider.stage)'
+  tableName: 'emails-table-${self:provider.stage}'
   dynamodb:
     start:
       migrate: true
@@ -25,16 +25,18 @@ provider:
         - dynamodb:PutItem
       Resource:
         - { "Fn::GetAtt": ["EmailTable", "Arn"] }
-  environment:
-    USERS_TABLE: $(self:custom.tableName)
 
 functions:
   health:
     handler: lambda/index.handler
+    environment:
+      EMAILS_TABLE: ${self:custom.tableName}
     events:
       - http: 'GET /health'
-  postUser:
+  postEmail:
     handler: lambda/index.handler
+    environment:
+      EMAILS_TABLE: ${self:custom.tableName}
     events:
       - http: 'POST /emails'
 
@@ -43,7 +45,7 @@ resources:
     EmailTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: emails
+        TableName: ${self:custom.tableName}
         AttributeDefinitions:
         - AttributeName: email
           AttributeType: S

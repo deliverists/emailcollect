@@ -6,13 +6,13 @@ const connection = () =>
     endpoint: 'http://localhost:8000',
   })
 
-module.exports.getEmailByAddress = email =>
+module.exports.getEmailByAddress = (TableName, email) =>
   connection()
     .query({
       ExpressionAttributeValues: {
         ':e': { S: email },
       },
       KeyConditionExpression: 'email = :e',
-      TableName: 'emails',
+      TableName,
     })
     .promise()

@@ -2,7 +2,7 @@ const AWS = require('aws-sdk')
 const variables = require('./variables')
 
 const connection = () => {
-  const { IS_OFFLINE } = variables
+  const { IS_OFFLINE } = variables()
   return new AWS.DynamoDB.DocumentClient(
     IS_OFFLINE
       ? {

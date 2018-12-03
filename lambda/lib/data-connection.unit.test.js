@@ -10,7 +10,7 @@ jest.mock('aws-sdk', () => ({
   },
 }))
 
-jest.mock('../../lambda/lib/variables', () => ({
+jest.mock('../../lambda/lib/variables', () => () => ({
   IS_OFFLINE: true,
 }))
 

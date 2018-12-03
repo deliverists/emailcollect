@@ -8,7 +8,7 @@ jest.mock('../data-connection', () => ({
     })),
   })),
 }))
-jest.mock('../variables', () => ({
+jest.mock('../variables', () => () => ({
   EMAILS_TABLE: 'table-namey-thing',
 }))
 jest.mock('./map-from-request-object', () => () => ({

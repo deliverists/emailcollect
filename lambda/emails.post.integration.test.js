@@ -1,12 +1,13 @@
 const lambdaModule = require('./index')
+const variables = require('./lib/variables')
 const wrapper = require('../test-lib/lambda-wrapper')
 const requestContext = require('../test-lib/request-context')
 const dynamoTester = require('../test-lib/dynamodb')
 const stringHelper = require('../test-lib/string')
 
-jest.mock('./lib/variables', () => ({
+jest.mock('./lib/variables', () => () => ({
   IS_OFFLINE: true,
-  EMAILS_TABLE: 'emails',
+  EMAILS_TABLE: 'emails-table-dev',
 }))
 
 describe('post emails', () => {
@@ -29,7 +30,7 @@ describe('post emails', () => {
     const email = newEmailAddress()
     await run({ site: testSite, email })
 
-    const queryResponse = await dynamoTester.getEmailByAddress(email)
+    const queryResponse = await dynamoTester.getEmailByAddress(variables().EMAILS_TABLE, email)
 
     expect(queryResponse.Count).toEqual(1)
     expect(queryResponse.Items[0].email.S).toEqual(email)
