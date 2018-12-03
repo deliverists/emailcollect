@@ -15,7 +15,7 @@ jest.mock('../../lambda/lib/variables', () => ({
 }))
 
 describe('data connection', () => {
-  test('something', async () => {
+  test('upsert calls put on aws sdk', async () => {
     const output = await connection.upsert('table-name', {
       foo: 'bart',
     })
