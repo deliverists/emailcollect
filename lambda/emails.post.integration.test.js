@@ -30,7 +30,10 @@ describe('post emails', () => {
     const email = newEmailAddress()
     await run({ site: testSite, email })
 
-    const queryResponse = await dynamoTester.getEmailByAddress(variables().EMAILS_TABLE, email)
+    const queryResponse = await dynamoTester.getEmailByAddress(
+      variables().EMAILS_TABLE,
+      email,
+    )
 
     expect(queryResponse.Count).toEqual(1)
     expect(queryResponse.Items[0].email.S).toEqual(email)
