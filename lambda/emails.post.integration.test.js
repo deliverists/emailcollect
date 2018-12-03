@@ -43,4 +43,14 @@ describe('post emails', () => {
     expect(response.statusCode).toEqual(422)
     expect(JSON.parse(response.body).message).toEqual('source ip does not exist')
   })
+
+  test('validates email address', async () => {
+    const email = '@@@!'
+    const response = await run({ site: testSite, email })
+
+    expect(response.statusCode).toEqual(422)
+    expect(JSON.parse(response.body).message).toEqual(
+      'email must be in the form: "recipient@domain.com"',
+    )
+  })
 })
