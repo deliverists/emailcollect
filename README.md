@@ -50,21 +50,17 @@ then probably you just need to run: `sls dynamodb install`
 
  * convert this mess to use express middleware properly!!!
     * DONE:
-    * TODO:
-      * ua
       * validate body
       * map body
+      * get the validation working properly
       * upsert
+    * TODO:
       * check origin allowed in sites list as well as site in body
-      * referer should be in whitelist too
+      * referer should be in whitelist too?
       * cors?
  * error response currently returns HTML not json error?, repo using: `curl -d {\"key\":\"value\"} -H "Content-Type: application/json" -X POST "http://localhost:3000/emails"`
  * `curl -d {\"email\":\"who.com\"} -H "Content-Type: application/json" -X POST "http://localhost:3000/emails"` creates error about missing key table_name - are the process env variables not set up right in local running?
  * need 2 jest test runs based on matching `.integration.test.js` and `.unit.test.js`
- * get the validation working properly
- * move all the extra checking that is in the old claudia files over
- * get some better overall testing
- * include the whitelisting etc.
 
  * move over to serverless
  * add dynamodb + lambda + api gateway (with limiting) into serverless setup
