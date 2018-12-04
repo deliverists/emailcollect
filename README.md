@@ -4,7 +4,7 @@
 
 ### endpoint:
 
-https://778qo5mxx9.execute-api.us-east-1.amazonaws.com/latest
+https://7770we21f0.execute-api.us-east-1.amazonaws.com/dev/emails
 
 ### resources:
 
@@ -48,8 +48,6 @@ then probably you just need to run: `sls dynamodb install`
 
 ### todo:
 
- * make 200 response a json object to simplify client code auto parsing json
- * clean up cors code - do we need the options line?
  * put dynamic cors option in checking site whitelist
  * add referer/ origin option in checking site whitelist
  * add throttling options??? - how reduce potential cost
