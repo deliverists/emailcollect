@@ -9,7 +9,7 @@ module.exports = (req, res) => {
   connection
     .upsert(EMAILS_TABLE, email)
     .then(() => {
-      res.send(`subscribed`)
+      res.send({ status: 'subscribed' })
     })
     .catch(err => {
       res.status(500).send(err)
