@@ -22,3 +22,16 @@ It is built from an integration between create-react-app and create-react-native
 | `yarn test-native`  | Run testing script for mobile app                       |
 | `yarn test-web`     | Run testing script for web app                          |
 | `yarn test`         | Run both testing scripts                                |
+
+## Todo:
+
+ * Get testing working!
+ * Get eslint rules working!
+ * Get packages updated and on 1 lock file (yarn pref)
+ * build aws amplify based login
+ * build the basic scenarios - i.e.:
+ 
+     1. customer signing up and registering a website (and this updating the whitelist)
+     2. customer being able to view the signups (up to 100 emails)
+     3. customer paying for premium access and being able to view all the signups
+
