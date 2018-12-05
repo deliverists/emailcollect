@@ -36,6 +36,16 @@ functions:
           path: /health
           method: get
           cors: true
+  getEmails:
+    handler: lambda/index.handler
+    environment:
+      EMAILS_TABLE: ${self:custom.tableName}
+    events:
+      - http:
+          path: /emails
+          method: get
+          cors: true
+          authorizer: aws_iam
   postEmail:
     handler: lambda/index.handler
     environment:
