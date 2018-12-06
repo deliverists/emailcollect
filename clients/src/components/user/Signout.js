@@ -4,7 +4,7 @@ import { Auth } from "aws-amplify";
 import { Button } from "react-native";
 
 export default observer(({ userStore }) => {
-  const onSignout = async () => {
+  const onSignOut = async () => {
     await Auth.signOut();
     userStore.hasSignedOut();
   };
@@ -12,7 +12,7 @@ export default observer(({ userStore }) => {
   return (
     <Button
       title={'Sign out'}
-      onPress={onSignout}
+      onPress={onSignOut}
     />
   );
 });

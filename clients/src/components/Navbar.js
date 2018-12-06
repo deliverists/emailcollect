@@ -3,15 +3,15 @@ import { observer } from 'mobx-react';
 import { View, Text, TouchableOpacity } from "react-native";
 import { Link } from '../Routing';
 
-import AuthInfo from './AuthInfo';
-import Signout from './Signout';
+import SignedInInfo from './user/SignedInInfo';
+import SignOut from './user/Signout';
 
 export default observer(({ userStore }) => {
-  const signedIn = <Signout userStore={userStore} />
+  const signedIn = <SignOut userStore={userStore} />
   const signedOut = (
     <View>
-      <Link to={'/login'} component={TouchableOpacity}>
-          <Text>login</Text>
+      <Link to={'/signin'} component={TouchableOpacity}>
+          <Text>sign in</Text>
       </Link>
       <Link to={'/signup'} component={TouchableOpacity}>
           <Text>signup</Text>
@@ -21,9 +21,9 @@ export default observer(({ userStore }) => {
   
   return (
     <View>
-      <AuthInfo userStore={userStore} />
-      {userStore.authenticated && signedIn}
-      {!userStore.authenticated && signedOut}
+      <SignedInInfo userStore={userStore} />
+      {userStore.signedIn && signedIn}
+      {!userStore.signedIn && signedOut}
     </View>
   );
 });

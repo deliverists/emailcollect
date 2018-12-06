@@ -5,8 +5,8 @@ import { Text } from "react-native";
 export default observer(({ userStore }) => {
   return (
     <Text>
-      {userStore.authenticated && 'Signed in'}
-      {!userStore.authenticated && 'Signed out'}
+      {userStore.signedIn && 'Signed in'}
+      {!userStore.signedIn && 'Signed out'}
     </Text>
   );
 });

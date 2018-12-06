@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, TextInput, Button, TouchableOpacity } from "react-native";
-import { Link } from '../Routing';
+import { Link } from '../../Routing';
 import { Auth } from "aws-amplify";
 import { observer } from 'mobx-react';
 
-class Signup extends React.Component {
+class SignIn extends React.Component {
   constructor(props) {
     super(props);
     
@@ -14,17 +14,16 @@ class Signup extends React.Component {
     };
   }
 
-  async onSignup() {
+  async onSignIn() {
     const { username, password } = this.state;
-    await Auth.signUp(username, password);
-    this.props.userStore.hasAuthenticated();
+    await Auth.signIn(username, password);
+    this.props.userStore.hasSignedIn();
   }
 
   render() {
     return (
       <View>
-        <Text>Sign up:</Text>
-        <Text>Logged in: {this.props.userStore.authenticated.toString()}</Text>
+        <Text>Sign in</Text>
 
         <View>
           <TextInput
@@ -40,18 +39,18 @@ class Signup extends React.Component {
           />
 
           <Button
-            title={'Signup'}
-            onPress={this.onSignup.bind(this)}
+            title={'Sign in'}
+            onPress={this.onSignIn.bind(this)}
           />
         </View>
 
 
         <Link to={'/'} component={TouchableOpacity}>
-            <Text>link home</Text>
+            <Text>go home</Text>
         </Link>
       </View>
     );
   }
 };
 
-export default observer(Signup);
+export default observer(SignIn);

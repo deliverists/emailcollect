@@ -26,7 +26,7 @@ export default observer(({ userStore }) => {
         onPress={health}
       />
 
-    {userStore.authenticated && 
+    {userStore.signedIn && 
       <Button
         title={'emails'}
         onPress={emails}

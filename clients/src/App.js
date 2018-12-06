@@ -2,11 +2,12 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import { Router, Switch, Route } from './Routing';
 
-import Home from './components/Home';
-import Login from './components/Login';
-import Signup from './components/Login';
-import Emails from './components/Emails';
 import Navbar from './components/Navbar';
+
+import Home from './components/Home';
+import SignIn from './components/user/Signin';
+import SignUp from './components/user/Signup';
+import Emails from './components/Emails';
 
 export default ({ userStore }) => {
   return (
@@ -19,12 +20,12 @@ export default ({ userStore }) => {
                     <Emails {...routeProps} userStore={userStore} />
                   )}
                 />
-                <Route path="/login" render={(routeProps) => (
-                    <Login {...routeProps} userStore={userStore} />
+                <Route path="/signin" render={(routeProps) => (
+                    <SignIn {...routeProps} userStore={userStore} />
                   )}
                 />
                 <Route path="/signup" render={(routeProps) => (
-                    <Signup {...routeProps} userStore={userStore} />
+                    <SignUp {...routeProps} userStore={userStore} />
                   )}
                 />
             </Switch>
