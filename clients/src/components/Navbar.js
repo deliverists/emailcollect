@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { Link } from '../Routing';
 
 import SignedInInfo from './user/SignedInInfo';
-import SignOut from './user/Signout';
+import SignOut from './user/SignOut';
 
 export default observer(({ userStore }) => {
   const signedIn = <SignOut userStore={userStore} />

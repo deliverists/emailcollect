@@ -5,8 +5,8 @@ import { Router, Switch, Route } from './Routing';
 import Navbar from './components/Navbar';
 
 import Home from './components/Home';
-import SignIn from './components/user/Signin';
-import SignUp from './components/user/Signup';
+import SignIn from './components/user/SignIn';
+import SignUp from './components/user/SignUp';
 import Emails from './components/Emails';
 
 export default ({ userStore }) => {
