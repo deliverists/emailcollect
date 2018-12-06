@@ -4,14 +4,19 @@ import { Router, Switch, Route } from './Routing';
 
 import Home from './components/Home';
 import Login from './components/Login';
+import Emails from './components/Emails';
 
-export default () => {
+export default ({ userStore }) => {
   return (
     <View style={styles.app}>
         <Router>
             <Switch>
                 <Route exact path="/" component={Home} />
-                <Route path="/login" component={Login} />
+                <Route exact path="/emails" component={Emails} />
+                <Route path="/login" render={(routeProps) => (
+                    <Login {...routeProps} userStore={userStore} />
+                  )}
+                />
             </Switch>
         </Router>
     </View>

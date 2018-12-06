@@ -9,6 +9,9 @@ export default () => {
       <Link to={'/login'} component={TouchableOpacity}>
           <Text>link to login</Text>
       </Link>
+      <Link to={'/emails'} component={TouchableOpacity}>
+          <Text>link to emails</Text>
+      </Link>
     </View>
   );
 };
