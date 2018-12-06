@@ -12,7 +12,6 @@ const initUserStore = async () => {
     userStore.hasSignedIn();
   }
   catch(e) {
-    console.log(e.message);
   }
 };
 

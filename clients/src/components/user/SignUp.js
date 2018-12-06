@@ -40,7 +40,7 @@ class SignUp extends React.Component {
 
           <Button
             title={'Sign up'}
-            onPress={this.onSignup.bind(this)}
+            onPress={this.onSignUp.bind(this)}
           />
         </View>
 
