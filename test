@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+
+npx aws-api-gateway-cli-test  --username test@testthis.com --password Password1234 --user-pool-id us-east-1_89dUWStzb --app-client-id 22vughf0hk2oaucpvdjr2cmnau --cognito-region us-east-1 --identity-pool-id us-east-1:b9478dc9-047e-4190-9ab1-9c4ee14ca9f3 --invoke-url https://7770we21f0.execute-api.us-east-1.amazonaws.com/dev --api-gateway-region us-east-1 --path-template /emails --method GET

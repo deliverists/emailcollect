@@ -4,7 +4,7 @@
 
 ### endpoint:
 
-https://778qo5mxx9.execute-api.us-east-1.amazonaws.com/latest
+https://7770we21f0.execute-api.us-east-1.amazonaws.com/dev/emails
 
 ### resources:
 
@@ -48,8 +48,7 @@ then probably you just need to run: `sls dynamodb install`
 
 ### todo:
 
- * make 200 response a json object to simplify client code auto parsing json
- * clean up cors code - do we need the options line?
+ * understand lambda and api gateway integration options: https://medium.com/@lakshmanLD/lambda-proxy-vs-lambda-integration-in-aws-api-gateway-3a9397af0e6d
  * put dynamic cors option in checking site whitelist
  * add referer/ origin option in checking site whitelist
  * add throttling options??? - how reduce potential cost
@@ -59,3 +58,12 @@ then probably you just need to run: `sls dynamodb install`
  * error response currently returns HTML not json error?, repo using: `curl -d {\"key\":\"value\"} -H "Content-Type: application/json" -X POST "http://localhost:3000/emails"`
  * `curl -d {\"email\":\"who.com\"} -H "Content-Type: application/json" -X POST "http://localhost:3000/emails"` creates error about missing key table_name - are the process env variables not set up right in local running?
  * need 2 jest test runs based on matching `.integration.test.js` and `.unit.test.js`
+
+### links
+
+#### cognito
+
+ * https://serverless-stack.com/chapters/create-a-cognito-user-pool.html
+
+ * https://aws.amazon.com/getting-started/projects/build-serverless-web-app-lambda-apigateway-s3-dynamodb-cognito/
+ * https://medium.freecodecamp.org/how-to-secure-microservices-on-aws-with-cognito-api-gateway-and-lambda-4bfaa7a6583c
