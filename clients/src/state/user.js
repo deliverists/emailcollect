@@ -2,14 +2,18 @@ import { action, decorate, observable } from "mobx"
 
 class User {
   authenticated = false;
-  authenticate() {
+  hasAuthenticated() {
     this.authenticated = true;
+  }
+  hasSignedOut() {
+    this.authenticated = false;
   }
 };
 
 decorate(User, {
   authenticated: observable,
-  authenticate: action,
+  hasAuthenticated: action,
+  hasSignedOut: action,
 });
 
 export default User;

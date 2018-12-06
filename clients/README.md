@@ -28,7 +28,8 @@ It is built from an integration between create-react-app and create-react-native
  * Get testing working!
  * Get eslint rules working!
  * Get packages updated and on 1 lock file (yarn pref)
- * build aws amplify based login
+ * make screens pretty :)
+
  * build the basic scenarios - i.e.:
  
      1. customer signing up
@@ -40,6 +41,7 @@ It is built from an integration between create-react-app and create-react-native
 
     1. sign up form
     2. get local storage amplify saved session sync'd up with mobx state
+    3. logout
 
  * tasks left for scenario 2:
 

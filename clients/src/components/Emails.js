@@ -1,9 +1,10 @@
 import React from 'react';
+import { observer } from 'mobx-react';
 import { Alert, View, Text, Button, TouchableOpacity } from "react-native";
 import { Link } from '../Routing';
 import { API } from "aws-amplify";
 
-export default () => {
+export default observer(({ userStore }) => {
   const health = async () => {
     const response = await API.get("emails", "/health");
     console.log(response.status);
@@ -16,6 +17,8 @@ export default () => {
     Alert.alert(response.status);
   };
 
+  console.log('NICK', userStore)
+
   return (
     <View>
       <Text>Emails page</Text>
@@ -25,14 +28,16 @@ export default () => {
         onPress={health}
       />
 
+    {userStore.authenticated && 
       <Button
         title={'emails'}
         onPress={emails}
       />
+    }
 
       <Link to={'/'} component={TouchableOpacity}>
           <Text>link to home</Text>
       </Link>
     </View>
   );
-};
+});

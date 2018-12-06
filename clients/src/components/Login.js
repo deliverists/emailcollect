@@ -17,7 +17,7 @@ class Login extends React.Component {
   async onLogin() {
     const { username, password } = this.state;
     await Auth.signIn(username, password);
-    this.props.userStore.authenticate();
+    this.props.userStore.hasAuthenticated();
   }
 
   render() {

@@ -12,7 +12,10 @@ export default ({ userStore }) => {
         <Router>
             <Switch>
                 <Route exact path="/" component={Home} />
-                <Route exact path="/emails" component={Emails} />
+                <Route path="/emails" render={(routeProps) => (
+                    <Emails {...routeProps} userStore={userStore} />
+                  )}
+                />
                 <Route path="/login" render={(routeProps) => (
                     <Login {...routeProps} userStore={userStore} />
                   )}
