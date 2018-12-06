@@ -6,11 +6,8 @@ export default () => {
   return (
     <View>
       <Text>Home page</Text>
-      <Link to={'/login'} component={TouchableOpacity}>
-          <Text>link to login</Text>
-      </Link>
       <Link to={'/emails'} component={TouchableOpacity}>
-          <Text>link to emails</Text>
+          <Text>go to emails</Text>
       </Link>
     </View>
   );

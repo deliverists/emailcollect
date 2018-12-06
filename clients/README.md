@@ -29,6 +29,7 @@ It is built from an integration between create-react-app and create-react-native
  * Get eslint rules working!
  * Get packages updated and on 1 lock file (yarn pref)
  * make screens pretty :)
+ * update to react native that bundles react 16.2 and use fragments in place of some pointless views
 
  * build the basic scenarios - i.e.:
  

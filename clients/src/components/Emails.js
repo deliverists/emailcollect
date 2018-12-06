@@ -17,8 +17,6 @@ export default observer(({ userStore }) => {
     Alert.alert(response.status);
   };
 
-  console.log('NICK', userStore)
-
   return (
     <View>
       <Text>Emails page</Text>
@@ -36,7 +34,7 @@ export default observer(({ userStore }) => {
     }
 
       <Link to={'/'} component={TouchableOpacity}>
-          <Text>link to home</Text>
+          <Text>go home</Text>
       </Link>
     </View>
   );
