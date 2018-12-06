@@ -31,7 +31,16 @@ It is built from an integration between create-react-app and create-react-native
  * build aws amplify based login
  * build the basic scenarios - i.e.:
  
-     1. customer signing up and registering a website (and this updating the whitelist)
-     2. customer being able to view the signups (up to 100 emails)
-     3. customer paying for premium access and being able to view all the signups
+     1. customer signing up
+     2. registering a website (and this updating the whitelist)
+     3. customer being able to view the signups (up to 100 emails)
+     4. customer paying for premium access and being able to view all the signups
 
+ * tasks left for scenario 1:
+
+    1. sign up form
+    2. get local storage amplify saved session sync'd up with mobx state
+
+ * tasks left for scenario 2:
+
+   
