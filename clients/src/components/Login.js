@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, View, Text, TextInput, Button, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, Button, TouchableOpacity } from "react-native";
 import { Link } from '../Routing';
 import { Auth } from "aws-amplify";
 import { observer } from 'mobx-react';
@@ -16,13 +16,7 @@ class Login extends React.Component {
 
   async onLogin() {
     const { username, password } = this.state;
-
-    try {
-      await Auth.signIn(username, password);
-      // Alert.alert("Logged in");
-    } catch (e) {
-      // Alert.alert(e.message);
-    }
+    await Auth.signIn(username, password);
     this.props.userStore.authenticate();
   }
 
