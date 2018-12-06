@@ -8,8 +8,8 @@ module.exports = (req, res) => {
   const email = mapFromRequestObject(req)
   connection
     .upsert(EMAILS_TABLE, email)
-    .then(() => {
-      res.send(`subscribed`)
+    .then(data => {
+      res.send({ status: 'subscribed', data })
     })
     .catch(err => {
       res.status(500).send(err)
