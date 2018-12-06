@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
-    "run:local": "sls offline start",
+    "start": "sls offline start",
     "test": "jest --notify --coverage",
     "watch": "yarn test --watch",
     "deploy": "sls deploy -v",

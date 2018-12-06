@@ -48,6 +48,8 @@ then probably you just need to run: `sls dynamodb install`
 
 ### todo:
 
+ * sigh move from expressjs to https://www.jeremydaly.com/current-projects/#lambda-api ???
+ * for reading: https://d1.awsstatic.com/whitepapers/architecture/AWS-Serverless-Applications-Lens.pdf
  * understand lambda and api gateway integration options: https://medium.com/@lakshmanLD/lambda-proxy-vs-lambda-integration-in-aws-api-gateway-3a9397af0e6d
  * put dynamic cors option in checking site whitelist
  * add referer/ origin option in checking site whitelist
