@@ -4,6 +4,8 @@ import { Link } from '../../Routing';
 import { Auth } from "aws-amplify";
 import { observer } from 'mobx-react';
 
+import SignedIn from './SignedIn';
+
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
@@ -21,35 +23,40 @@ class SignIn extends React.Component {
   }
 
   render() {
-    return (
-      <View>
-        <Text>Sign in</Text>
-
+    if (this.props.userStore.signedIn) {
+      return <SignedIn />;
+    }
+    else {
+      return (
         <View>
-          <TextInput
-            value={this.state.username}
-            onChangeText={(username) => this.setState({ username })}
-            placeholder={'Username'}
-          />
-          <TextInput
-            value={this.state.password}
-            onChangeText={(password) => this.setState({ password })}
-            placeholder={'Password'}
-            secureTextEntry={true}
-          />
+          <Text>Sign in</Text>
 
-          <Button
-            title={'Sign in'}
-            onPress={this.onSignIn.bind(this)}
-          />
+          <View>
+            <TextInput
+              value={this.state.username}
+              onChangeText={(username) => this.setState({ username })}
+              placeholder={'Username'}
+            />
+            <TextInput
+              value={this.state.password}
+              onChangeText={(password) => this.setState({ password })}
+              placeholder={'Password'}
+              secureTextEntry={true}
+            />
+
+            <Button
+              title={'Sign in'}
+              onPress={this.onSignIn.bind(this)}
+            />
+          </View>
+
+
+          <Link to={'/'} component={TouchableOpacity}>
+              <Text>go home</Text>
+          </Link>
         </View>
-
-
-        <Link to={'/'} component={TouchableOpacity}>
-            <Text>go home</Text>
-        </Link>
-      </View>
-    );
+      );
+    }
   }
 };
 

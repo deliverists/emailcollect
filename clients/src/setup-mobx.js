@@ -9,7 +9,7 @@ export const userStore = new UserStore();
 const initUserStore = async () => {
   try {
     await Auth.currentSession();
-    userStore.hasAuthenticated();
+    userStore.hasSignedIn();
   }
   catch(e) {
     console.log(e.message);
