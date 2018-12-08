@@ -26,6 +26,8 @@ It is built from an integration between create-react-app and create-react-native
 ## Todo:
 
  * architecture:
+   * get iphone version working locally
+   * test against android version on real phone
    * Get testing working!
    * Get eslint rules working!
    * Get packages updated and on 1 lock file (yarn pref)
