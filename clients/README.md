@@ -25,34 +25,34 @@ It is built from an integration between create-react-app and create-react-native
 
 ## Todo:
 
- * Get testing working!
- * Get eslint rules working!
- * Get packages updated and on 1 lock file (yarn pref)
+ * architecture:
+   * Get testing working!
+   * Get eslint rules working!
+   * Get packages updated and on 1 lock file (yarn pref)
+   * check if we can use hooks yet to get rid of the class
+   * check mobx best practices
+ * clean up
+   * update to react native that bundles react 16.2 and use fragments in place of some pointless views
+   * sort Warning: Invalid value for prop `component` on <a> tag
  * make screens pretty :)
- * update to react native that bundles react 16.2 and use fragments in place of some pointless views
- * sort Warning: Invalid value for prop `component` on <a> tag
- * move links into a navbar
- * output current username in SignedInInfo component from aws-amplify.Auth.currentAuthenticatedUser()
- * ensure signup page shows signedin component if signedin like signin page does - then make it a HOC :)
- * check if we can use hooks yet to get rid of the class
- * add spinners on loading/ signing in attributes
- * check mobx best practices
- * make confirmation (email verification) work from a link on the email
- * add forgotten password functionality
+   * choose styling library
+   * move links into a navbar
+ * sign in:
+   * make confirmation (email verification) work from a link on the email
+   * output current username in SignedInInfo component from aws-amplify.Auth.currentAuthenticatedUser()
+   * add forgotten password functionality
+   * make "signedin" a hoc that signin and signup use?
+   * add spinners on loading/ signing in attributes
 
  * build the basic scenarios - i.e.:
  
-     1. customer signing up
      2. registering a website (and this updating the whitelist)
      3. customer being able to view the signups (up to 100 emails)
      4. customer paying for premium access and being able to view all the signups
 
- * tasks left for scenario 1:
-
-    1. sign up form
-    2. get local storage amplify saved session sync'd up with mobx state
-    3. logout
-
  * tasks left for scenario 2:
 
+  1. make a "register a site screen"
+  2. add a dynamo table for the whitelist
+  2. make a "register site api"
   ......
