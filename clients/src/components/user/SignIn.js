@@ -20,43 +20,40 @@ class SignIn extends React.Component {
     const { username, password } = this.state;
     await Auth.signIn(username, password);
     this.props.userStore.hasSignedIn();
+    this.props.history.push("/");
   }
 
   render() {
-    if (this.props.userStore.signedIn) {
-      return <SignedIn />;
-    }
-    else {
-      return (
-        <View>
-          <Text>Sign in</Text>
+    const signinForm = <View>
+      <TextInput
+        value={this.state.username}
+        onChangeText={(username) => this.setState({ username })}
+        placeholder={'Username'}
+      />
+      <TextInput
+        value={this.state.password}
+        onChangeText={(password) => this.setState({ password })}
+        placeholder={'Password'}
+        secureTextEntry={true}
+      />
 
-          <View>
-            <TextInput
-              value={this.state.username}
-              onChangeText={(username) => this.setState({ username })}
-              placeholder={'Username'}
-            />
-            <TextInput
-              value={this.state.password}
-              onChangeText={(password) => this.setState({ password })}
-              placeholder={'Password'}
-              secureTextEntry={true}
-            />
+      <Button
+        title={'Sign in'}
+        onPress={this.onSignIn.bind(this)}
+      />
+    </View>
+    return (
+      <View>
+        <Text>Sign in</Text>
 
-            <Button
-              title={'Sign in'}
-              onPress={this.onSignIn.bind(this)}
-            />
-          </View>
+        {this.props.userStore.signedIn && <SignedIn />}
+        {!this.props.userStore.signedIn && signinForm}
 
-
-          <Link to={'/'} component={TouchableOpacity}>
-              <Text>go home</Text>
-          </Link>
-        </View>
-      );
-    }
+        <Link to={'/'} component={TouchableOpacity}>
+            <Text>go home</Text>
+        </Link>
+      </View>
+    );
   }
 };
 

@@ -30,6 +30,13 @@ It is built from an integration between create-react-app and create-react-native
  * Get packages updated and on 1 lock file (yarn pref)
  * make screens pretty :)
  * update to react native that bundles react 16.2 and use fragments in place of some pointless views
+ * sort Warning: Invalid value for prop `component` on <a> tag
+ * move links into a navbar
+ * output current username in SignedInInfo component from aws-amplify.Auth.currentAuthenticatedUser()
+ * ensure signup page shows signedin component if signedin like signin page does - then make it a HOC :)
+ * check if we can use hooks yet to get rid of the class
+ * add spinners on loading/ signing in attributes
+ * check mobx best practices
 
  * build the basic scenarios - i.e.:
  
@@ -46,4 +53,4 @@ It is built from an integration between create-react-app and create-react-native
 
  * tasks left for scenario 2:
 
-   
+  ......
