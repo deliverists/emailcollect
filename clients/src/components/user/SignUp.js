@@ -4,6 +4,8 @@ import { Link } from '../../Routing';
 import { Auth } from "aws-amplify";
 import { observer } from 'mobx-react';
 
+import SignedIn from './SignedIn';
+
 class SignUp extends React.Component {
   constructor(props) {
     super(props);
@@ -87,8 +89,9 @@ class SignUp extends React.Component {
       <View>
         <Text>Sign up:</Text>
 
-        {this.state.newUser && confirmation}
-        {!this.state.newUser && signup}
+        {!this.props.userStore.signedIn && this.state.newUser && confirmation}
+        {!this.props.userStore.signedIn && !this.state.newUser && signup}
+        {this.props.userStore.signedIn && <SignedIn />}
 
         <Link to={'/'} component={TouchableOpacity}>
             <Text>home</Text>

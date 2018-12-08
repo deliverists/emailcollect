@@ -37,6 +37,8 @@ It is built from an integration between create-react-app and create-react-native
  * check if we can use hooks yet to get rid of the class
  * add spinners on loading/ signing in attributes
  * check mobx best practices
+ * make confirmation (email verification) work from a link on the email
+ * add forgotten password functionality
 
  * build the basic scenarios - i.e.:
  
