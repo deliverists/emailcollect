@@ -45,6 +45,16 @@ It is built from an integration between create-react-app and create-react-native
    * add forgotten password functionality
    * make "signedin" a hoc that signin and signup use?
    * add spinners on loading/ signing in attributes
+   * follow guidance here: https://www.chromium.org/developers/design-documents/create-amazing-password-forms
+   * move auth logic (i.e. api calls) out of components into their own classes called from the store functions
+   * bring in TypeScript
+   * move all forms to controlled - all the ui state in mobx
+   * ditch react router/navigation for mobx routing
+ * register site:
+   * auth'd endpoint - check serverless -stack site for 1 way of doing this
+ * code debt:
+   * 404 component
+   * using bind in react component handlers - how get rid of this? - https://reactjs.org/blog/2015/01/27/react-v0.13.0-beta-1.html#autobinding
 
  * build the basic scenarios - i.e.:
  

@@ -15,7 +15,7 @@ class SignUp extends React.Component {
       username: "",
       password: "",
       confirmationCode: "",
-      newUser: null
+      newUser: null,
     };
   }
 

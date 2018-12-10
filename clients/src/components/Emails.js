@@ -34,7 +34,7 @@ export default observer(({ userStore }) => {
     }
 
       <Link to={'/'} component={TouchableOpacity}>
-          <Text>go home</Text>
+          <Text>home</Text>
       </Link>
     </View>
   );
