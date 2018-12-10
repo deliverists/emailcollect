@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import Home from './components/Home';
 import SignIn from './components/user/SignIn';
 import SignUp from './components/user/SignUp';
+import VerifySignUp from './components/user/VerifySignUp';
 import Emails from './components/Emails';
 import Sites from './components/site/sites';
 import Register from './components/site/register';
@@ -36,6 +37,10 @@ export default ({ userStore, sitesStore }) => {
                 />
                 <Route path="/signup" render={(routeProps) => (
                     <SignUp {...routeProps} userStore={userStore} />
+                  )}
+                />
+                <Route path="/verify" render={(routeProps) => (
+                    <VerifySignUp {...routeProps} userStore={userStore} />
                   )}
                 />
             </Switch>

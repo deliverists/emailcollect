@@ -1,18 +1,6 @@
-import { Auth } from "aws-amplify";
 import { configure } from "mobx"
-import UserStore from './state/user';
+import userFactory from './state/user'
 
 configure({enforceActions: 'observed'})
 
-export const userStore = new UserStore();
-
-const initUserStore = async () => {
-  try {
-    await Auth.currentSession();
-    userStore.hasSignedIn();
-  }
-  catch(e) {
-  }
-};
-
-initUserStore();
+export const userStore = userFactory()

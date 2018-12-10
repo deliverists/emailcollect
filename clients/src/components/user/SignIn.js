@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, TextInput, Button, TouchableOpacity } from "react-native";
 import { Link } from '../../Routing';
-import { Auth } from "aws-amplify";
 import { observer } from 'mobx-react';
 
 import SignedIn from './SignedIn';
@@ -11,24 +10,25 @@ class SignIn extends React.Component {
     super(props);
     
     this.state = {
-      username: '',
+      email: '',
       password: '',
     };
   }
 
   async onSignIn() {
-    const { username, password } = this.state;
-    await Auth.signIn(username, password);
-    this.props.userStore.hasSignedIn();
-    this.props.history.push("/");
+    const { email, password } = this.state;
+    const { success } = await this.props.userStore.signIn(email, password);
+    if (success) this.props.history.push("/");
   }
 
   render() {
+    const { error, state, signedIn } = this.props.userStore;
+
     const signinForm = <View>
       <TextInput
-        value={this.state.username}
-        onChangeText={(username) => this.setState({ username })}
-        placeholder={'Username'}
+        value={this.state.email}
+        onChangeText={(email) => this.setState({ email })}
+        placeholder={'email'}
       />
       <TextInput
         value={this.state.password}
@@ -36,6 +36,8 @@ class SignIn extends React.Component {
         placeholder={'Password'}
         secureTextEntry={true}
       />
+      <Text>State: {state}</Text>
+      <Text>Error: {error}</Text>
 
       <Button
         title={'Sign in'}
@@ -46,11 +48,11 @@ class SignIn extends React.Component {
       <View>
         <Text>Sign in</Text>
 
-        {this.props.userStore.signedIn && <SignedIn />}
-        {!this.props.userStore.signedIn && signinForm}
+        {signedIn && <SignedIn />}
+        {!signedIn && signinForm}
 
         <Link to={'/'} component={TouchableOpacity}>
-            <Text>go home</Text>
+            <Text>home</Text>
         </Link>
       </View>
     );

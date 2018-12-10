@@ -5,19 +5,14 @@ import { observer } from 'mobx-react';
 
 import SignedIn from './SignedIn';
 
-class SignUp extends React.Component {
+class VerifySignUp extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       email: "",
-      password: "",
       confirmationCode: "",
     };
-  }
-
-  handleSubmit = async () => {
-    await this.props.userStore.signUp(this.state.email, this.state.password)
   }
 
   handleConfirmationSubmit = async () => {
@@ -26,28 +21,9 @@ class SignUp extends React.Component {
   };
 
   render() {
-    const { error, state, signedIn, awaitingVerification } = this.props.userStore;
+    const { error, state, signedIn } = this.props.userStore;
 
-    const signup = <View>
-      <TextInput
-        value={this.state.email}
-        onChangeText={(email) => this.setState({ email })}
-        placeholder={'Email'}
-      />
-      <TextInput
-        value={this.state.password}
-        onChangeText={(password) => this.setState({ password })}
-        placeholder={'Password'}
-        secureTextEntry={true}
-      />
-
-      <Button
-        title={'Sign up'}
-        onPress={this.handleSubmit.bind(this)}
-      />
-    </View>;
-
-    const confirmation = <View>
+    const confirmationForm = <View>
       <TextInput
         value={this.state.confirmationCode}
         onChangeText={(confirmationCode) => this.setState({ confirmationCode })}
@@ -60,18 +36,12 @@ class SignUp extends React.Component {
       />
     </View>;
 
-    let form;
-    if (signedIn) {
-      form = <SignedIn />
-    } else {
-      form = awaitingVerification ? confirmation : signup
-    }
-
     return (
       <View>
-        <Text>Sign up:</Text>
+        <Text>Verify email:</Text>
 
-        {form}
+        {signedIn && <SignedIn />}
+        {!signedIn && confirmationForm}
 
         <Text>State: {state}</Text>
         <Text>Error: {error}</Text>
@@ -84,4 +54,4 @@ class SignUp extends React.Component {
   }
 };
 
-export default observer(SignUp);
+export default observer(VerifySignUp);
