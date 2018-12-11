@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, Button, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, Button } from "react-native";
 import { Link } from '../../Routing';
 import { observer } from 'mobx-react';
 
@@ -53,7 +53,7 @@ class SignUp extends React.Component {
         <Text>State: {state}</Text>
         <Text>Error: {error}</Text>
 
-        <Link to={'/'} component={TouchableOpacity}>
+        <Link to={'/'}>
             <Text>home</Text>
         </Link>
       </View>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import { Alert, View, Text, Button, TouchableOpacity } from "react-native";
+import { Alert, View, Text, Button } from "react-native";
 import { Link } from '../Routing';
 import { API } from "aws-amplify";
 
@@ -33,7 +33,7 @@ export default observer(({ userStore }) => {
       />
     }
 
-      <Link to={'/'} component={TouchableOpacity}>
+      <Link to={'/'}>
           <Text>home</Text>
       </Link>
     </View>

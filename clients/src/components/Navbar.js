@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text } from "react-native";
 import { Link } from '../Routing';
 
 import SignedInInfo from './user/SignedInInfo';
@@ -10,10 +10,10 @@ export default observer(({ userStore }) => {
   const signedIn = <SignOut userStore={userStore} />
   const signedOut = (
     <View>
-      <Link to={'/signin'} component={TouchableOpacity}>
+      <Link to={'/signin'}>
           <Text>sign in</Text>
       </Link>
-      <Link to={'/signup'} component={TouchableOpacity}>
+      <Link to={'/signup'}>
           <Text>signup</Text>
       </Link>
     </View>

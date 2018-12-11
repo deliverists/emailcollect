@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react';
-import { View, Text, TextInput, Button, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, Button } from "react-native";
 import { Link } from '../../Routing';
 
 class Register extends React.Component {
@@ -44,7 +44,7 @@ class Register extends React.Component {
 
         {form}
 
-        <Link to={'/'} component={TouchableOpacity}>
+        <Link to={'/'}>
             <Text>home</Text>
         </Link>
       </View>

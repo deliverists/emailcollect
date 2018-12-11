@@ -33,9 +33,6 @@ It is built from an integration between create-react-app and create-react-native
    * Get packages updated and on 1 lock file (yarn pref)
    * check if we can use hooks yet to get rid of the class
    * check mobx best practices
- * clean up
-   * update to react native that bundles react 16.2 and use fragments in place of some pointless views
-   * sort Warning: Invalid value for prop `component` on <a> tag
  * make screens pretty :)
    * choose styling library
    * move links into a navbar
@@ -51,6 +48,8 @@ It is built from an integration between create-react-app and create-react-native
  * register site:
    * auth'd endpoint - check serverless -stack site for 1 way of doing this
  * code debt:
+   * update to react native that bundles react 16.2 and use fragments in place of some pointless views
+   * understand the touchableopacity component attribute on Link (removed because in web it created a prop warning for <a>)
    * bring in TypeScript
    * move all forms to controlled - all the ui state in mobx
    * ditch react router/navigation for mobx routing
