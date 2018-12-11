@@ -41,14 +41,13 @@ It is built from an integration between create-react-app and create-react-native
    * move links into a navbar
  * sign in:
    * make confirmation (email verification) work from a link on the email
+   * make confirmation work from a new load of app in the verify screen (add email manually)
    * output current username in SignedInInfo component from aws-amplify.Auth.currentAuthenticatedUser()
    * add forgotten password functionality
    * make "signedin" a hoc that signin and signup use?
    * add spinners on loading/ signing in attributes
    * add sign in/ sign up/ verify validation info available to users
    * follow guidance here: https://www.chromium.org/developers/design-documents/create-amazing-password-forms
-   * move auth logic (i.e. api calls) out of components into their own classes called from the store functions
-   * make forms controlled so signup and confirm can share email field
  * register site:
    * auth'd endpoint - check serverless -stack site for 1 way of doing this
  * code debt:

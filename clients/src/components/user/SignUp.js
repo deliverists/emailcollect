@@ -17,18 +17,14 @@ class SignUp extends React.Component {
   }
 
   handleSubmit = async () => {
-    await this.props.userStore.signUp(this.state.email, this.state.password)
-  }
-
-  handleConfirmationSubmit = async () => {
-    const { success } = await this.props.userStore.confirmSignUp(this.state.email, this.state.confirmationCode)
-    if (success) this.props.history.push("/");
+    const { success } = await this.props.userStore.signUp(this.state.email, this.state.password)
+    if (success) this.props.history.push("/verify");
   };
 
   render() {
-    const { error, state, signedIn, awaitingVerification } = this.props.userStore;
+    const { error, state, signedIn } = this.props.userStore;
 
-    const signup = <View>
+    const signUpForm = <View>
       <TextInput
         value={this.state.email}
         onChangeText={(email) => this.setState({ email })}
@@ -47,31 +43,12 @@ class SignUp extends React.Component {
       />
     </View>;
 
-    const confirmation = <View>
-      <TextInput
-        value={this.state.confirmationCode}
-        onChangeText={(confirmationCode) => this.setState({ confirmationCode })}
-        placeholder={'Confirmation code'}
-      />
-
-      <Button
-        title={'Verify'}
-        onPress={this.handleConfirmationSubmit.bind(this)}
-      />
-    </View>;
-
-    let form;
-    if (signedIn) {
-      form = <SignedIn />
-    } else {
-      form = awaitingVerification ? confirmation : signup
-    }
-
     return (
       <View>
         <Text>Sign up:</Text>
 
-        {form}
+        {signedIn && <SignedIn />}
+        {!signedIn && signUpForm}
 
         <Text>State: {state}</Text>
         <Text>Error: {error}</Text>

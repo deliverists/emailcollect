@@ -10,13 +10,12 @@ class VerifySignUp extends React.Component {
     super(props);
 
     this.state = {
-      email: "",
       confirmationCode: "",
     };
   }
 
   handleConfirmationSubmit = async () => {
-    const { success } = await this.props.userStore.confirmSignUp(this.state.email, this.state.confirmationCode)
+    const { success } = await this.props.userStore.confirmSignUp(this.state.confirmationCode)
     if (success) this.props.history.push("/");
   };
 

@@ -19,6 +19,8 @@ class User {
 
   state = userStates.SIGNED_OUT
   error = null
+  unverifiedUserEmail = null
+  password = null
 
   async _apiAction (requestingState, successState, failureState, apiFunc) {
     runInAction(() => {
@@ -65,21 +67,30 @@ class User {
   }
 
   async signUp(email, password) {
-    return this._apiAction(
+    const response = await this._apiAction(
       userStates.SIGNING_UP,
       userStates.UNVERIFIED,
       userStates.SIGNED_OUT,
       async () => this.api.signUp(email, password),
     )
+    runInAction(() => {
+      this.unverifiedUserEmail = response.result.user.username
+      this.password = password
+    })
+    return response
   }
 
-  async confirmSignUp(email, confirmationCode) {
-    return this._apiAction(
+  async confirmSignUp(confirmationCode) {
+    const response = await this._apiAction(
       userStates.VERIFYING_SIGN_UP,
       userStates.SIGNING_UP,
       userStates.UNVERIFIED,
-      async () => this.api.confirmSignUp(email, confirmationCode),
+      async () => this.api.confirmSignUp(this.unverifiedUserEmail, confirmationCode),
     )
+    if (response.success)
+      return await this.signIn(this.unverifiedUserEmail, this.password)
+    else
+      return response
   }
 }
 
