@@ -1,7 +1,7 @@
 const validate = require('./validate')
 const upsert = require('./upsert')
 
-module.exports = app => {
-  validate(app)
-  app.post('/emails', upsert)
+module.exports = api => {
+  validate(api)
+  api.post('/emails', upsert)
 }

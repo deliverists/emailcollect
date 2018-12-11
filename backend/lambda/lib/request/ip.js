@@ -1,10 +1,13 @@
 const invalidate = require('../invalidate')
+
 const maxLength = 16
 const re = /\b\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}\b/
 
 const invalidateIp = invalidate('ip')
 
-module.exports = ({ ip }, res, next) => {
+module.exports = (req, res, next) => {
+  const ip = req.ip
+  console.log('ARGH', req)
   const sendInvalidation = invalidateIp(res)
 
   if (!ip) sendInvalidation('source ip does not exist')

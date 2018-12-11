@@ -1,23 +1,15 @@
-const serverless = require('serverless-http')
-const bodyParser = require('body-parser')
-const cors = require('cors')
-const express = require('express')
+const api = require('lambda-api')({ logger: { level: 'debug', access: 'true' } })
 
 const validateRequest = require('./lib/request/validate')
+const cors = require('./lib/request/cors')
 const emails = require('./lib/emails')
 
-const app = express()
+cors(api)
+// validateRequest(api)
 
-app.use(cors())
-app.use((req, res, next) => {
-  console.log('NICK IN YOUR YULE LOGS', req)
-  next()
-})
-app.use(bodyParser.json({ strict: false }))
-validateRequest(app)
+api.get('/health', (req, res) => res.send({ status: 'a-okay' }))
+api.get('/emails', (req, res) => res.send({ status: 'some list of emails!' }))
+api.post('/emails', (req, res) => res.send({ status: 'test' }))
+// emails(api)
 
-app.get('/health', (req, res) => res.send({ status: 'a-okay' }))
-app.get('/emails', (req, res) => res.send({ status: 'some list of emails!' }))
-emails(app)
-
-module.exports.handler = serverless(app)
+module.exports.handler = async (event, context) => api.run(event, context)
