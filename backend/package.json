@@ -9,7 +9,8 @@
   "scripts": {
     "prestart": "sls dynamodb install",
     "start": "sls offline start",
-    "test": "jest --notify --coverage",
+    "test:ci": "jest --notify --coverage",
+    "test": "jest --notify",
     "watch": "yarn test --watch",
     "deploy": "sls deploy -v",
     "deploy:postemail": "sls deploy function -f postEmail -v",

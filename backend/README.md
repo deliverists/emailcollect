@@ -62,6 +62,11 @@ then probably you just need to run: `sls dynamodb install`
 
  * tests to add - if invalid body then return a 400 not a 500 because of destructuring
  * add unit tests around files with missing coverage
+ * remove massive duplication in emails/sites folders
+ * remove duplication in integration tests
+ * remove pointless mocking of variables() in integration tests - now at request level they aren't used - remove them along with improving the dynamodb query test methods
+ * add unit test coverage for sites
+ * add better validation for sites registering
 
 ### links
 

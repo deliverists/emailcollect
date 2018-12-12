@@ -9,7 +9,8 @@ custom:
   jest:
     notify: true
     collectCoverage: true
-  tableName: 'emails-table-${self:provider.stage}'
+  emailsTableName: 'emailcollect-emails-${self:provider.stage}'
+  sitesTableName: 'emailcollect-sites-${self:provider.stage}'
   dynamodb:
     start:
       migrate: true
@@ -27,19 +28,10 @@ provider:
         - { "Fn::GetAtt": ["EmailTable", "Arn"] }
 
 functions:
-  health:
-    handler: lambda/index.handler
-    environment:
-      EMAILS_TABLE: ${self:custom.tableName}
-    events:
-      - http:
-          path: /health
-          method: get
-          cors: true
   getEmails:
     handler: lambda/index.handler
     environment:
-      EMAILS_TABLE: ${self:custom.tableName}
+      EMAILS_TABLE: ${self:custom.emailsTableName}
     events:
       - http:
           path: /emails
@@ -49,19 +41,39 @@ functions:
   postEmail:
     handler: lambda/index.handler
     environment:
-      EMAILS_TABLE: ${self:custom.tableName}
+      EMAILS_TABLE: ${self:custom.emailsTableName}
     events:
       - http:
           path: /emails
           method: post
           cors: true
+  getSites:
+    handler: lambda/index.handler
+    environment:
+      SITES_TABLE: ${self:custom.sitesTableName}
+    events:
+      - http:
+          path: /sites
+          method: get
+          cors: true
+          authorizer: aws_iam
+  postSite:
+    handler: lambda/index.handler
+    environment:
+      SITES_TABLE: ${self:custom.sitesTableName}
+    events:
+      - http:
+          path: /sites
+          method: post
+          cors: true
+          authorizer: aws_iam
 
 resources:
   Resources:
     EmailTable:
       Type: AWS::DynamoDB::Table
       Properties:
-        TableName: ${self:custom.tableName}
+        TableName: ${self:custom.emailsTableName}
         AttributeDefinitions:
         - AttributeName: email
           AttributeType: S
@@ -81,6 +93,31 @@ resources:
             KeyType: HASH
           - AttributeName: date
             KeyType: RANGE
+          Projection:
+            ProjectionType: KEYS_ONLY
+          ProvisionedThroughput:
+            ReadCapacityUnits: 2
+            WriteCapacityUnits: 2
+        ProvisionedThroughput:
+          ReadCapacityUnits: 2
+          WriteCapacityUnits: 2
+    SiteTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:custom.sitesTableName}
+        AttributeDefinitions:
+        - AttributeName: site
+          AttributeType: S
+        - AttributeName: email
+          AttributeType: S
+        KeySchema:
+        - AttributeName: site
+          KeyType: HASH
+        GlobalSecondaryIndexes:
+        - IndexName: by-email
+          KeySchema:
+          - AttributeName: email
+            KeyType: HASH
           Projection:
             ProjectionType: KEYS_ONLY
           ProvisionedThroughput:

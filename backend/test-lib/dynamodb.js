@@ -16,3 +16,15 @@ module.exports.getEmailByAddress = (TableName, email) =>
       TableName,
     })
     .promise()
+
+module.exports.getSiteByEmail = (TableName, email) =>
+  connection()
+    .query({
+      ExpressionAttributeValues: {
+        ':e': { S: email },
+      },
+      KeyConditionExpression: 'email = :e',
+      IndexName: 'by-email',
+      TableName,
+    })
+    .promise()
