@@ -48,7 +48,6 @@ then probably you just need to run: `sls dynamodb install`
 
 ### todo:
 
- * sigh move from expressjs to https://www.jeremydaly.com/current-projects/#lambda-api ???
  * for reading: https://d1.awsstatic.com/whitepapers/architecture/AWS-Serverless-Applications-Lens.pdf
  * understand lambda and api gateway integration options: https://medium.com/@lakshmanLD/lambda-proxy-vs-lambda-integration-in-aws-api-gateway-3a9397af0e6d
  * put dynamic cors option in checking site whitelist
@@ -62,6 +61,7 @@ then probably you just need to run: `sls dynamodb install`
  * need 2 jest test runs based on matching `.integration.test.js` and `.unit.test.js`
 
  * tests to add - if invalid body then return a 400 not a 500 because of destructuring
+ * add unit tests around files with missing coverage
 
 ### links
 

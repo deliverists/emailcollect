@@ -9,12 +9,19 @@
   "scripts": {
     "prestart": "sls dynamodb install",
     "start": "sls offline start",
-    "test": "jest --notify",
-    "test:ci": "jest --notify --coverage",
+    "test": "jest --notify --coverage",
     "watch": "yarn test --watch",
     "deploy": "sls deploy -v",
     "deploy:postemail": "sls deploy function -f postEmail -v",
     "invoke": "sls invoke -f postEmail -l"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "lambda/**/*.js",
+      "test-lib/**/*.js",
+      "!**/node_modules/**",
+      "!**/vendor/**"
+    ]
   },
   "dependencies": {
     "aws-sdk": "^2.350.0",
