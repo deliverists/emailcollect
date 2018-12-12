@@ -5,11 +5,16 @@ const cors = require('./lib/request/cors')
 const emails = require('./lib/emails')
 
 cors(api)
-// validateRequest(api)
+validateRequest(api)
 
 api.get('/health', (req, res) => res.send({ status: 'a-okay' }))
 api.get('/emails', (req, res) => res.send({ status: 'some list of emails!' }))
-api.post('/emails', (req, res) => res.send({ status: 'test' }))
-// emails(api)
+emails(api)
 
-module.exports.handler = async (event, context) => api.run(event, context)
+const errorLogger = (err, req, res, next) => {
+  console.log(err)
+  next()
+}
+api.use(errorLogger)
+
+exports.handler = async (event, context) => api.run(event, context)

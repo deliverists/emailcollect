@@ -4,14 +4,12 @@ const mapFromRequestObject = require('./map-from-request-object')
 
 const { EMAILS_TABLE } = variables()
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
   const email = mapFromRequestObject(req)
-  connection
-    .upsert(EMAILS_TABLE, email)
-    .then(data => {
-      res.send({ status: 'subscribed', data })
-    })
-    .catch(err => {
-      res.status(500).send(err)
-    })
+  try {
+    const data = await connection.upsert(EMAILS_TABLE, email)
+    res.send({ status: 'subscribed', data })
+  } catch (err) {
+    res.status(500).send(err)
+  }
 }

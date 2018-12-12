@@ -17,6 +17,11 @@ describe('emails object mapping', () => {
         email: 'me@there.com',
       },
       ip: 'some-ip-address',
+      requestContext: {
+        identity: {
+          sourceIp: 'some-ip-address',
+        },
+      },
       headers: {
         'user-agent': 'some user agent',
       },

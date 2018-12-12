@@ -6,7 +6,14 @@ describe('validate request', () => {
   let next
 
   beforeEach(() => {
-    req = { ip: null }
+    req = {
+      ip: null,
+      requestContext: {
+        identity: {
+          sourceIp: null,
+        },
+      },
+    }
     res = {
       status: jest.fn(() => res),
       send: jest.fn(() => res),
@@ -16,6 +23,7 @@ describe('validate request', () => {
 
   const testIp = (ip, message) => {
     req.ip = ip
+    req.requestContext.identity.sourceIp = ip
     validateRequest(req, res, next)
     expect(res.status).toHaveBeenCalledWith(422)
     expect(res.send).toHaveBeenCalledWith(expect.objectContaining({ message }))

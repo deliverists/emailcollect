@@ -61,6 +61,8 @@ then probably you just need to run: `sls dynamodb install`
  * `curl -d {\"email\":\"who.com\"} -H "Content-Type: application/json" -X POST "http://localhost:3000/emails"` creates error about missing key table_name - are the process env variables not set up right in local running?
  * need 2 jest test runs based on matching `.integration.test.js` and `.unit.test.js`
 
+ * tests to add - if invalid body then return a 400 not a 500 because of destructuring
+
 ### links
 
 #### cognito

@@ -2,11 +2,7 @@ const connection = require('../data-connection')
 const upsert = require('./upsert')
 
 jest.mock('../data-connection', () => ({
-  upsert: jest.fn(() => ({
-    then: jest.fn(() => ({
-      catch: jest.fn(),
-    })),
-  })),
+  upsert: jest.fn(() => Promise.resolve()),
 }))
 jest.mock('../variables', () => () => ({
   EMAILS_TABLE: 'table-namey-thing',
@@ -40,29 +36,15 @@ describe('emails upserting', () => {
     })
   })
 
-  test('sends 200 if connection resolves promise', () => {
-    connection.upsert.mockImplementation(() => ({
-      then: func => {
-        func()
-        return {
-          catch: () => {},
-        }
-      },
-    }))
-    upsert({}, res)
+  test('sends 200 if connection resolves promise', async () => {
+    await upsert({}, res)
     expect(res.status).not.toHaveBeenCalled()
     expect(res.send).toHaveBeenCalled()
   })
 
-  test('sends 500 if connection rejects promise', () => {
-    connection.upsert.mockImplementation(() => ({
-      then: () => ({
-        catch: func => {
-          func()
-        },
-      }),
-    }))
-    upsert({}, res)
+  test('sends 500 if connection rejects promise', async () => {
+    connection.upsert.mockImplementation(() => Promise.reject())
+    await upsert({}, res)
     expect(res.status).toHaveBeenCalledWith(500)
     expect(res.send).toHaveBeenCalled()
   })
