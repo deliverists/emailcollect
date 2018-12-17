@@ -1,14 +1,5 @@
-import { Auth } from "aws-amplify"
-
-const apiCallCatchWrapper = async func => {
-  try {
-    const result = await func()
-    return { success: true, result }
-  }
-  catch (e) {
-    return { success: false, message: typeof e === 'string' ? e : e.message }
-  }
-}
+import { Auth } from 'aws-amplify'
+import apiCallCatchWrapper from './call-catch-wrapper'
 
 export default class UserApi {
   hasCurrentSession = async () => {

@@ -11,6 +11,10 @@ export default observer(({ sitesStore }) => (
           <Text>register a site</Text>
       </Link>
 
+      <Text>{sitesStore.loading && 'loading...'}</Text>
+      <Text>error: {sitesStore.error}</Text>
+      <Text>sites: {sitesStore.sites}</Text>
+
       <Link to={'/'}>
           <Text>home</Text>
       </Link>

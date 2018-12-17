@@ -12,7 +12,7 @@ Amplify.configure({
   API: {
     endpoints: [
       {
-        name: "emails",
+        name: "emailcollect",
         endpoint: config.apiGateway.URL,
         region: config.apiGateway.REGION
       },

@@ -3,53 +3,37 @@ import { observer } from 'mobx-react';
 import { View, Text, TextInput, Button } from "react-native";
 import { Link } from '../../Routing';
 
-class Register extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isLoading: false,
-      domainName: "",
-    };
+export default observer(({ sitesStore }) => {
+  const updateSiteToRegister = async site => {
+    await sitesStore.updateSiteToRegister(site)
   }
 
-  handleSubmit = async () => {
-    this.setState({ isLoading: true });
-
-    try {
-    } catch (e) {
-      alert(typeof e === 'string' ? e : e.message);
-    }
-
-    this.setState({ isLoading: false });
+  const registerSite = async site => {
+    await sitesStore.registerSite(site)
   }
 
-  render() {
-    const form = <View>
-      <TextInput
-        value={this.state.domainName}
-        onChangeText={(domainName) => this.setState({ domainName })}
-        placeholder={'Domain name'}
-      />
+  const form = <View>
+    <TextInput
+      value={sitesStore.siteToRegister}
+      onChangeText={updateSiteToRegister}
+      placeholder={'Domain name'}
+    />
 
-      <Button
-        title={'Register domain'}
-        onPress={this.handleSubmit.bind(this)}
-      />
-    </View>;
+    <Button
+      title={'Register domain'}
+      onPress={registerSite}
+    />
+  </View>
 
-    return (
-      <View>
-        <Text>Register a new site:</Text>
+  return (
+    <View>
+      <Text>Register a new site:</Text>
 
-        {form}
+      {form}
 
-        <Link to={'/'}>
-            <Text>home</Text>
-        </Link>
-      </View>
-    );
-  }
-};
-
-export default observer(Register);
+      <Link to={'/'}>
+          <Text>home</Text>
+      </Link>
+    </View>
+  )
+})
