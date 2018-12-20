@@ -1,7 +1,8 @@
-import Amplify from "aws-amplify";
-import config from './config';
+import Amplify from "aws-amplify"
+import setupConfig from './config';
 
-Amplify.configure({
+const config = setupConfig()
+const setup = () => Amplify.configure({
   Auth: {
     mandatorySignIn: true,
     region: config.cognito.REGION,
@@ -18,5 +19,6 @@ Amplify.configure({
       },
     ]
   }
-});
+})
 
+setup()

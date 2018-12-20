@@ -20,3 +20,31 @@ module.exports.upsert = (TableName, Item) =>
       Item,
     })
     .promise()
+
+module.exports.query = (
+  TableName,
+  IndexName,
+  hashKeyName,
+  hashKeyValue,
+  rangeKeyName,
+  rangeKeyValue,
+) => {
+  let KeyConditionExpression = `${hashKeyName} = :hkey`
+  const ExpressionAttributeValues = {
+    ':hkey': hashKeyValue,
+  }
+  if (rangeKeyName) {
+    KeyConditionExpression += ` and ${rangeKeyName} > :rkey`
+    ExpressionAttributeValues[':rkey'] = rangeKeyValue
+  }
+  const params = {
+    TableName,
+    IndexName,
+    KeyConditionExpression,
+    ExpressionAttributeValues,
+  }
+
+  return connection()
+    .query(params)
+    .promise()
+}

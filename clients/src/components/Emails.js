@@ -5,8 +5,8 @@ import { Link } from '../Routing';
 import { API } from "aws-amplify";
 
 export default observer(({ userStore }) => {
-  const health = async () => {
-    const response = await API.get("emailcollect", "/health");
+  const sites = async () => {
+    const response = await API.get("emailcollect", "/sites");
     console.log(response.status);
     Alert.alert(response.status);
   };
@@ -22,8 +22,8 @@ export default observer(({ userStore }) => {
       <Text>Emails page</Text>
 
       <Button
-        title={'health'}
-        onPress={health}
+        title={'sites'}
+        onPress={sites}
       />
 
     {userStore.signedIn && 

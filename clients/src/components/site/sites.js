@@ -13,7 +13,7 @@ export default observer(({ sitesStore }) => (
 
       <Text>{sitesStore.loading && 'loading...'}</Text>
       <Text>error: {sitesStore.error}</Text>
-      <Text>sites: {sitesStore.sites}</Text>
+      <Text>sites: {sitesStore.sites.length}</Text>
 
       <Link to={'/'}>
           <Text>home</Text>
