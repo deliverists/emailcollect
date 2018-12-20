@@ -5,12 +5,16 @@ const invalidateSite = invalidate('site')
 
 const maxLength = 254
 
-module.exports = ({ body: { site: _site } }, res, next) => {
-  const sendInvalidation = invalidateSite(res)
-  const site = normalize(_site)
+module.exports = ({ body, method }, res, next) => {
+  if (method !== 'POST') {
+    next()
+  } else {
+    const sendInvalidation = invalidateSite(res)
+    const site = normalize(body.site)
 
-  if (!site) sendInvalidation('domain name must be included')
-  else if (site.length > maxLength)
-    sendInvalidation(`email must be shorter than ${maxLength + 1} characters`)
-  else next()
+    if (!site) sendInvalidation('domain name must be included')
+    else if (site.length > maxLength)
+      sendInvalidation(`email must be shorter than ${maxLength + 1} characters`)
+    else next()
+  }
 }

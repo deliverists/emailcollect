@@ -34,7 +34,11 @@ class Sites {
 
   async getRegisteredSites(site) {
     const response = await this._apiAction(async () => this.api.getRegisteredSites())
-    runInAction(() => this.sites = response.result.data.Items)
+
+    if (response.success)
+      runInAction(() => this.sites = response.result.data.Items)
+    else
+      return response
   }
 };
 

@@ -9,7 +9,6 @@ module.exports = req => {
     },
     headers,
   } = req
-  console.log('info', req)
   return {
     site,
     email: cognitoIdentityId,
