@@ -6,13 +6,13 @@ import { API } from "aws-amplify";
 
 export default observer(({ userStore }) => {
   const health = async () => {
-    const response = await API.get("emails", "/health");
+    const response = await API.get("emailcollect", "/health");
     console.log(response.status);
     Alert.alert(response.status);
   };
 
   const emails = async () => {
-    const response = await API.get("emails", "/emails");
+    const response = await API.get("emailcollect", "/emails");
     console.log(response.status);
     Alert.alert(response.status);
   };
