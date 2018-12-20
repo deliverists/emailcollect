@@ -73,10 +73,12 @@ class User {
       userStates.SIGNED_OUT,
       async () => this.api.signUp(email, password),
     )
-    runInAction(() => {
-      this.unverifiedUserEmail = response.result.user.username
-      this.password = password
-    })
+    if (response.success) {
+      runInAction(() => {
+        this.unverifiedUserEmail = response.result.user.username
+        this.password = password
+      })
+    }
     return response
   }
 
