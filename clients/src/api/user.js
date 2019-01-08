@@ -1,5 +1,8 @@
-import { Auth } from 'aws-amplify'
+import { Auth as OnlineAuth } from 'aws-amplify'
+import { Auth as OfflineAuth } from './offline-auth'
 import apiCallCatchWrapper from './call-catch-wrapper'
+
+const Auth = process.env.REACT_APP_OFFLINE ? OfflineAuth : OnlineAuth
 
 export default class UserApi {
   hasCurrentSession = async () => {

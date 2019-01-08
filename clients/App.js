@@ -1,10 +1,8 @@
 import React from "react";
 import HybridApp from "./src/App";
 
-import setupAmplify from './src/setup-amplify';
+import './src/setup-amplify';
 import { userStore, sitesStore } from './src/setup-mobx';
-
-setupAmplify()
 
 export default class NativeApp extends React.Component {
   render() {

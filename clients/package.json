@@ -21,6 +21,7 @@
     "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
     "scripts": {
         "web": "react-scripts start",
+        "web-offline": "REACT_APP_OFFLINE=true react-scripts start",
         "build-web": "react-scripts build",
         "test-web": "react-scripts test --env=jsdom",
         "eject-web": "react-scripts eject",
