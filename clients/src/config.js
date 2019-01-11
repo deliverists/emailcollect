@@ -5,6 +5,14 @@ const cognito = {
   IDENTITY_POOL_ID: 'us-east-1:b9478dc9-047e-4190-9ab1-9c4ee14ca9f3'
 }
 
+const prod = {
+  apiGateway: {
+    REGION: 'us-east-1',
+    URL: 'unknown'
+  },
+  cognito,
+}
+
 const dev = {
   apiGateway: {
     REGION: 'us-east-1',
@@ -13,10 +21,18 @@ const dev = {
   cognito,
 }
 
-const local = {
+const localWeb = {
   apiGateway: {
     REGION: 'localhost',
     URL: 'http://localhost:3000'
+  },
+  cognito,
+}
+
+const localAndroid = {
+  apiGateway: {
+    REGION: 'localhost',
+    URL: 'http://10.0.3.2:3000'
   },
   cognito,
 }
