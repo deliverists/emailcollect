@@ -1,10 +1,6 @@
-import React from 'react';
-import { View, Text } from "react-native";
+import React from 'react'
+import { View, Text } from "react-native"
 
-export default ({ site }) => {
-  return (
-    <View>
-      {site.site}
-    </View>
-  )
-}
+export default ({ site }) => (
+  <Text>{site.item.site}</Text>
+)
