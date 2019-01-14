@@ -4,7 +4,8 @@ import { View, Text, FlatList } from "react-native";
 import { Link } from '../../Routing';
 import Site from './site';
 
-export default observer(({ sitesStore }) => (
+export default observer(({ sitesStore }) => {
+  return (
     <View>
       <Text>Registered sites</Text>
 
@@ -19,11 +20,13 @@ export default observer(({ sitesStore }) => (
 
       <FlatList
         data={sitesStore.sites}
-        renderItem={({site}) => <Site site={site}></Site>}
+        renderItem={(site) => <Site site={site}></Site>}
+        keyExtractor={(site) => site.site}
       />
 
       <Link to={'/'}>
           <Text>home</Text>
       </Link>
     </View>
-));
+  );
+});

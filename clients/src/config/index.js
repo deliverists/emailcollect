@@ -1,3 +1,5 @@
+import local from './local'
+
 const cognito = {
   REGION: 'us-east-1',
   USER_POOL_ID: 'us-east-1_89dUWStzb',
@@ -21,20 +23,9 @@ const dev = {
   cognito,
 }
 
-const localWeb = {
-  apiGateway: {
-    REGION: 'localhost',
-    URL: 'http://localhost:3000'
-  },
+const localEnv = {
+  apiGateway: local,
   cognito,
 }
 
-const localAndroid = {
-  apiGateway: {
-    REGION: 'localhost',
-    URL: 'http://10.0.3.2:3000'
-  },
-  cognito,
-}
-
-export default () => true ? local : dev
+export default () => process.env.NODE_ENV === 'development' ? localEnv : dev
