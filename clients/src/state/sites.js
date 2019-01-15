@@ -1,9 +1,9 @@
 import { runInAction, action, decorate, observable } from "mobx"
-import SiteApi from '../api/site';
+import SiteApi from '../api/site'
 
 class Sites {
   constructor(api) {
-    this.api = api;
+    this.api = api
   }
 
   loading = false
@@ -29,18 +29,22 @@ class Sites {
   }
 
   async registerSite() {
-    return this._apiAction(async () => this.api.registerSite(this.siteToRegister))
+    const x = await this._apiAction(async () => this.api.registerSite(this.siteToRegister))
+    runInAction(() => {
+      this.sites.push(this.siteToRegister)
+      this.siteToRegister = ''
+    })
   }
 
   async getRegisteredSites(site) {
     const response = await this._apiAction(async () => this.api.getRegisteredSites())
 
     if (response.success)
-      runInAction(() => this.sites = response.result.data.Items)
+      runInAction(() => this.sites = response.result.data.Items.map(item => item.site))
     else
       return response
   }
-};
+}
 
 decorate(Sites, {
   siteToRegister: observable,
@@ -48,8 +52,8 @@ decorate(Sites, {
   error: observable,
   sites: observable,
   updateSiteToRegister: action,
-});
+})
 
 const siteFactory = () => new Sites(new SiteApi())
 
-export default siteFactory;
+export default siteFactory

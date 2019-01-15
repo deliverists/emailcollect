@@ -19,8 +19,8 @@ export default observer(({ sitesStore }) => (
 
     <FlatList
       data={sitesStore.sites}
-      renderItem={site => <Site site={site}></Site>}
-      keyExtractor={site => site.site}
+      renderItem={site => <Site site={site.item}></Site>}
+      keyExtractor={site => site}
     />
 
     <Link to={'/'}>
