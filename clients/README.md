@@ -65,6 +65,9 @@ It is built from an integration between create-react-app and create-react-native
  * tasks left for scenario 2:
 
   1. make a "register a site screen"
+      client side validation
+      respond to server side validation
+      server side is allowing duplicates?
   2. add a dynamo table for the whitelist
   2. make a "register site api"
   3. add limits for number of sites a user can add

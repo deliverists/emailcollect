@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TextInput, Button } from "react-native";
-import { Link } from '../../Routing';
+import { Link } from '../../routing/Components';
 import { observer } from 'mobx-react';
 
 import SignedIn from './SignedIn';

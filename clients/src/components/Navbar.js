@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 import { View, Text } from "react-native";
-import { Link } from '../Routing';
+import { Link } from '../routing/Components';
 
 import SignedInInfo from './user/SignedInInfo';
 import SignOut from './user/SignOut';

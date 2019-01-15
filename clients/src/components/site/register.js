@@ -1,15 +1,17 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 import { View, Text, TextInput, Button } from "react-native";
-import { Link } from '../../Routing';
+import { Link } from '../../routing/Components';
 
-export default observer(({ sitesStore }) => {
+export default observer(({ sitesStore, history }) => {
   const updateSiteToRegister = async site => {
     await sitesStore.updateSiteToRegister(site)
   }
 
   const registerSite = async site => {
-    await sitesStore.registerSite(site)
+    const response = await sitesStore.registerSite(site)
+    if (response.success)
+      history.push('/sites')
   }
 
   const form = <View>

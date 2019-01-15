@@ -1,20 +1,23 @@
-import React from "react";
-import { View, StyleSheet } from "react-native";
-import { Router, Switch, Route } from './Routing';
+import React from 'react'
+import { View, StyleSheet } from 'react-native'
+import { withRouter } from 'react-router'
+import { Router, Switch, Route } from './routing/Components'
+import history from './routing/history'
 
-import Navbar from './components/Navbar';
+import Navbar from './components/Navbar'
 
-import Home from './components/Home';
-import SignIn from './components/user/SignIn';
-import SignUp from './components/user/SignUp';
-import VerifySignUp from './components/user/VerifySignUp';
-import Emails from './components/Emails';
-import Sites from './components/site/sites';
-import Register from './components/site/register';
+import Home from './components/Home'
+import SignIn from './components/user/SignIn'
+import SignUp from './components/user/SignUp'
+import VerifySignUp from './components/user/VerifySignUp'
+import Emails from './components/Emails'
+import Sites from './components/site/sites'
+import Register from './components/site/register'
 
 export default ({ userStore, sitesStore }) => {
+  const RegisterWithRouter = withRouter(Register)
   return (
-    <Router>
+    <Router history={history}>
       <View style={styles.app}>
           <Navbar userStore={userStore} />
             <Switch>
@@ -24,7 +27,7 @@ export default ({ userStore, sitesStore }) => {
                   )}
                 />
                 <Route path="/sites/register" render={(routeProps) => (
-                    <Register {...routeProps} sitesStore={sitesStore} />
+                    <RegisterWithRouter sitesStore={sitesStore} />
                   )}
                 />
                 <Route path="/sites" render={(routeProps) => (
@@ -46,11 +49,11 @@ export default ({ userStore, sitesStore }) => {
             </Switch>
         </View>
       </Router>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
     app: {
         flex: 1
     }
-});
+})

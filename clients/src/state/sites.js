@@ -29,11 +29,13 @@ class Sites {
   }
 
   async registerSite() {
-    const x = await this._apiAction(async () => this.api.registerSite(this.siteToRegister))
-    runInAction(() => {
-      this.sites.push(this.siteToRegister)
-      this.siteToRegister = ''
-    })
+    const response = await this._apiAction(async () => this.api.registerSite(this.siteToRegister))
+    if (response.success) 
+      runInAction(() => {
+        this.sites.push(this.siteToRegister)
+        this.siteToRegister = ''
+      })
+    return response
   }
 
   async getRegisteredSites(site) {

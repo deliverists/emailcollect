@@ -1,7 +1,7 @@
 import React from 'react'
 import { observer } from 'mobx-react'
 import { View, Text, FlatList } from "react-native"
-import { Link } from '../../Routing'
+import { Link } from '../../routing/Components'
 import Site from './site'
 
 export default observer(({ sitesStore }) => (

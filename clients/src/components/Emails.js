@@ -1,7 +1,7 @@
 import React from 'react';
 import { observer } from 'mobx-react';
 import { Alert, View, Text, Button } from "react-native";
-import { Link } from '../Routing';
+import { Link } from '../routing/Components';
 import { API } from "aws-amplify";
 
 export default observer(({ userStore }) => {

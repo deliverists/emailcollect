@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from "react-native";
-import { Link } from '../Routing';
+import { Link } from '../routing/Components';
 
 export default () => {
   return (
